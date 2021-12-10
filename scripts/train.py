@@ -31,7 +31,7 @@ if __name__ == '__main__':
     model = tqc.TQC(**config, env=env, verbose=1, tensorboard_log=f"runs/{run.id}")
     result = model.learn(1000000, callback=WandbCallback(
         gradient_save_freq=100,
-        model_save_freq=10000
+        model_save_freq=10000,
         model_save_path=f"models/{run.id}",
         verbose=2
     ))
