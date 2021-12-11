@@ -3,6 +3,7 @@ import butia_gym
 import gym
 from wandb.integration.sb3 import WandbCallback
 from sb3_contrib.tqc import tqc
+from stable_baselines3.ppo import ppo
 from sb3_contrib.common.wrappers.time_feature import TimeFeatureWrapper
 from stable_baselines3.common.buffers import *
 from stable_baselines3.common.monitor import Monitor
@@ -13,7 +14,7 @@ import yaml
 import wandb
 
 if __name__ == '__main__':
-    with open('configs/pick_place_tqc_her.yaml', 'r') as f:
+    with open('configs/pick_place_ppo.yaml', 'r') as f:
         config = yaml.load(f)
     run = wandb.init(
         project="sb3",
@@ -24,11 +25,11 @@ if __name__ == '__main__':
     if 'replay_buffer_class' in config:
         config['replay_buffer_class'] = eval(config['replay_buffer_class'])
     def make_env():
-        env = gym.make('DoRISPickAndPlace-v1')
+        env = gym.make('DoRISPickAndPlaceDense-v1')
         env = TimeFeatureWrapper(env)
         env = Monitor(env)
         return env
-    env = DummyVecEnv([make_env,])
+    env = DummyVecEnv([make_env,]*19)
     env = VecVideoRecorder(env, f"videos/{run.id}", record_video_trigger=lambda x: x % 2000 == 0, video_length=200)
     model = tqc.TQC(**config, env=env, verbose=0, tensorboard_log=f"runs/{run.id}")
     result = model.learn(1000000, callback=WandbCallback(
