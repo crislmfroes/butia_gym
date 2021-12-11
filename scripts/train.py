@@ -31,7 +31,7 @@ if __name__ == '__main__':
         return env
     env = DummyVecEnv([make_env,]*19)
     env = VecVideoRecorder(env, f"videos/{run.id}", record_video_trigger=lambda x: x % 2000 == 0, video_length=200)
-    model = tqc.TQC(**config, env=env, verbose=0, tensorboard_log=f"runs/{run.id}")
+    model = ppo.PPO(**config, env=env, verbose=0, tensorboard_log=f"runs/{run.id}")
     result = model.learn(1000000, callback=WandbCallback(
         gradient_save_freq=100,
         model_save_freq=100,
