@@ -10,7 +10,7 @@ MODEL_XML_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "doris"
 class DoRISPickAndPlaceEnv(DoRISManipulationEnv, utils.EzPickle):
     def __init__(self, reward_type="sparse"):
         initial_qpos = {
-            "dorso_arm_base": 0.45,
+            "dorso_arm_base": 0.2,
             "forearm_shoulder_joint": 0.75,
             "roll_joint": -1.5,
             "yaw_joint": 1.5,
@@ -25,8 +25,8 @@ class DoRISPickAndPlaceEnv(DoRISManipulationEnv, utils.EzPickle):
             gripper_extra_height=0.2,
             target_in_the_air=True,
             target_offset=0.0,
-            obj_range=0.15,
-            target_range=0.15,
+            obj_range=0.1,
+            target_range=0.1,
             distance_threshold=0.05,
             initial_qpos=initial_qpos,
             reward_type=reward_type,
