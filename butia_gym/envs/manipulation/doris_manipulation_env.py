@@ -85,6 +85,7 @@ class DoRISManipulationEnv(robot_env.RobotEnv):
             action.copy()
         )  # ensure that we don't change the action outside of this scope
         pos_ctrl, gripper_ctrl = action[:3], action[3]
+        gripper_ctrl = np.clip(gripper_ctrl, -1.0, 1.0)
 
         pos_ctrl *= 0.05  # limit maximum change in position
         rot_ctrl = [
