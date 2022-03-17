@@ -22,7 +22,7 @@ class DoRISPickAndPlaceEnv(DoRISManipulationEnv, utils.EzPickle):
             has_object=True,
             block_gripper=False,
             n_substeps=20,
-            gripper_extra_height=0.7,
+            gripper_extra_height=0.2,
             target_in_the_air=True,
             target_offset=0.0,
             obj_range=0.1,
