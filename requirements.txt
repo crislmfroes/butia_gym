@@ -1,4 +1,4 @@
-ray[rllib]<1.11.0
+ray[rllib]<1.8.0
 wandb
 pybullet
 git+https://github.com/qgallouedec/panda-gym.git
