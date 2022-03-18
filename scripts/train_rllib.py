@@ -80,8 +80,8 @@ if __name__ == '__main__':
     env_name = 'butia_gym.envs.manipulation.pick_and_place_env.DoRISPickAndPlaceEnv'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
     config = sac.DEFAULT_CONFIG.copy()
-    config['num_gpus'] = 0
-    config['num_workers'] = 1
+    config['num_gpus'] = 1
+    config['num_workers'] = 8
     config['horizon'] = 50
     config['framework'] = 'torch'
     #config['disable_env_checking'] = True
@@ -108,6 +108,6 @@ if __name__ == '__main__':
         config=config,
         callbacks=callbacks,
         stop={
-            "training_iteration": 1
+            "training_iteration": 1000000
         },
     )
