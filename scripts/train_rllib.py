@@ -82,8 +82,8 @@ if __name__ == '__main__':
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
     config = sac.DEFAULT_CONFIG.copy()
     config['framework'] = 'tf2'
-    config['num_gpus'] = 1
-    config['num_workers'] = 8
+    config['num_gpus'] = 0
+    config['num_workers'] = 1
     config['horizon'] = 50
     #config['framework'] = 'torch'
     #config['disable_env_checking'] = True
@@ -99,9 +99,9 @@ if __name__ == '__main__':
     config['env_config']['HER_RAND_GOALS'] = 4
     config['env_config']['max_steps'] = 50
     config['env_config']['range_goal'] = 50
-    config['callbacks'] = MultiCallbacks([
-        HerCallback,
-    ])
+    #config['callbacks'] = MultiCallbacks([
+    #    HerCallback,
+    #])
     config['env'] = env_name
     callbacks = [WandbLoggerCallback('doris-manipulation', 'DRL')]
     tune.run(
