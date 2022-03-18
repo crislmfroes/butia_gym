@@ -76,7 +76,7 @@ if __name__ == '__main__':
     config['num_gpus'] = 1
     config['num_workers'] = 8
     #config['env_config']['render_mode'] = 'human'
-    config['env_config']['render'] = True
+    config['env_config']['render'] = False
     config['env_config']['HER_RANDOM'] = True
     config['env_config']['HER_OPT'] = True
     config['env_config']['clip_obs'] = True
