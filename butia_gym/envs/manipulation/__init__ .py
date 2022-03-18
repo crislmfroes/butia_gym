@@ -26,18 +26,3 @@ gym.envs.register(
           reward_type="dense",
      )
 )
-
-gym.envs.register(
-     id='DoRISGrasp-v1',
-     entry_point='butia_gym.envs.manipulation.grasp_env:DoRISGraspEnv',
-     max_episode_steps=50,
-)
-
-gym.envs.register(
-     id='DoRISGraspShaped-v1',
-     entry_point='butia_gym.envs.manipulation.grasp_env:DoRISGraspEnv',
-     max_episode_steps=50,
-     kwargs=dict(
-          reward_type="shaped",
-     )
-)
