@@ -1,5 +1,5 @@
 ray[rllib]
 wandb
 pybullet
-panda_gym
-gym<0.22.0
+panda_gym==1.1.1
+gym==0.19.0
