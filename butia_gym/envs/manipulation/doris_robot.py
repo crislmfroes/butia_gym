@@ -31,7 +31,7 @@ class DoRISRobot(PyBulletRobot):
         self.sim.set_lateral_friction(self.body_name, self.finger_indices[1], lateral_friction=1.0)
         self.sim.set_spinning_friction(self.body_name, self.finger_indices[0], spinning_friction=0.001)
         self.sim.set_spinning_friction(self.body_name, self.finger_indices[1], spinning_friction=0.001)
-        self.observation_space = spaces.Box(-np.inf, np.inf, shape=(7,), dtype=np.float32)
+        #self.observation_space = spaces.Box(-np.inf, np.inf, shape=(7,), dtype=np.float32)
         #print(p.getJointInfo(0, 13))
         for i in range(20):
             print(p.getJointInfo(0, i))
