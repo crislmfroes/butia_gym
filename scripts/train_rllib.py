@@ -87,9 +87,9 @@ if __name__ == '__main__':
     #config['framework'] = 'torch'
     #config['disable_env_checking'] = True
     config['observation_space'] = Dict({
-        'observation': Box(-np.inf, np.inf, shape=(19,)),
         'achieved_goal': Box(-np.inf, np.inf, shape=(3,)),
         'desired_goal': Box(-np.inf, np.inf, shape=(3,)),
+        'observation': Box(-np.inf, np.inf, shape=(19,)),
     })
     config['env_config']['render'] = False
     config['env_config']['HER_RANDOM'] = True
