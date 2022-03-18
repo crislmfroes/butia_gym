@@ -7,10 +7,10 @@ import time
 
 class DoRISPickAndPlaceEnv(RobotTaskEnv):
     def __init__(self, render: bool = False, reward_type: str = "sparse", **kwargs):
-        sim = PyBullet(render=render)
-        robot = DoRISRobot(sim)
-        task = DoRISPickAndPlaceTask(sim, reward_type=reward_type, get_ee_position=robot.get_ee_position)
-        super().__init__(robot, task)
+        self.sim = PyBullet(render=render)
+        self.robot = DoRISRobot(sim)
+        self.task = DoRISPickAndPlaceTask(sim, reward_type=reward_type, get_ee_position=robot.get_ee_position)
+        RobotTaskEnv.__init__(self)
         '''self.observation_space['observation'].low = -50*np.ones(shape=self.observation_space['observation'].shape)
         self.observation_space['observation'].high = 50*np.ones(shape=self.observation_space['observation'].shape)
         self.observation_space['desired_goal'].low = -50*np.ones(shape=self.observation_space['desired_goal'].shape)
@@ -20,6 +20,3 @@ class DoRISPickAndPlaceEnv(RobotTaskEnv):
     
     #def change_level(self, level):
     #    self.task.change_level(level)
-
-    def reset(self, seed=None):
-        return super().reset(seed)
