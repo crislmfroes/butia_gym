@@ -1,2 +1,0 @@
-from butia_gym.envs.manipulation.reach import DoRISReachEnv
-from butia_gym.envs.manipulation.pick_and_place import DoRISPickAndPlaceEnv
