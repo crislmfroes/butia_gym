@@ -86,7 +86,7 @@ if __name__ == '__main__':
     config['horizon'] = 50
     config['framework'] = 'torch'
     #config['disable_env_checking'] = True
-    config['observation_space'] = Dict({
+    config['env_config']['observation_space'] = Dict({
         'observation': Box(-np.inf, np.inf, shape=(19,)),
         'achieved_goal': Box(-np.inf, np.inf, shape=(3,)),
         'desired_goal': Box(-np.inf, np.inf, shape=(3,)),
