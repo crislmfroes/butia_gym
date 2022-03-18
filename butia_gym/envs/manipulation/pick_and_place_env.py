@@ -18,5 +18,5 @@ class DoRISPickAndPlaceEnv(RobotTaskEnv):
         self.observation_space['achieved_goal'].low = -50*np.ones(shape=self.observation_space['achieved_goal'].shape)
         self.observation_space['achieved_goal'].high = 50*np.ones(shape=self.observation_space['achieved_goal'].shape)'''
     
-    def change_level(self, level):
-        self.task.change_level(level)
+    #def change_level(self, level):
+    #    self.task.change_level(level)

@@ -92,7 +92,7 @@ class DoRISRobot(PyBulletRobot):
         joint_angles = [0.0,]*len(self.joint_indices)
         joint_angles[-2:-1] = [-0.05, -0.05]
         self.set_joint_angles(joint_angles)
-        return self.get_obs()
+        #return self.get_obs()
 
     def get_ee_position(self):
         gripper_position = self.get_link_position(link=self.ee_link)
