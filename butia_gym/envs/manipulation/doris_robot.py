@@ -88,10 +88,10 @@ class DoRISRobot(PyBulletRobot):
         arm_joint_angles = arm_joint_angles[self.joint_indices][:-2]
         arm_joint_angles[0] = np.clip(arm_joint_angles[0], 0.0, 0.8)
         gripper_joint_angles = [0.6, 0.6]
-        self.set_joint_angles(np.concatenate([arm_joint_angles, gripper_joint_angles]))'''
+        self.set_joint_values(np.concatenate([arm_joint_angles, gripper_joint_angles]))'''
         joint_angles = [0.0,]*len(self.joint_indices)
         joint_angles[-2:-1] = [-0.05, -0.05]
-        self.set_joint_angles(joint_angles)
+        self.set_joint_values(joint_angles)
         #return self.get_obs()
 
     def get_ee_position(self):
