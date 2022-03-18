@@ -9,6 +9,10 @@ import os
 class DoRISRobot(PyBulletRobot):
     """DoRIS robot"""
 
+    JOINT_INDICES = np.array([6, 7, 8, 9, 10, 11, 12, 17, 18])
+    JOINT_FORCES = np.array([1000.0,]*9)
+    FINGERS_INDICES = np.array([17, 18])
+
     def __init__(self, sim):
         action_dim = 4
         action_space = spaces.Box(-1.0, 1.0, shape=(action_dim,), dtype=np.float32)
@@ -23,10 +27,7 @@ class DoRISRobot(PyBulletRobot):
             base_position=np.array([-0.6, 0.0, -0.35]),
         )
         self.action_space=action_space
-        #joint_indices=np.array([6, 7, 8, 9, 10, 11, 12, 14, 15])
-        self.joint_indices=np.array([6, 7, 8, 9, 10, 11, 12, 17, 18])
-        self.joint_forces=np.array([1000.0,]*9)
-        self.finger_indices = np.array([17, 18])
+        #JOINT_INDICES=np.array([6, 7, 8, 9, 10, 11, 12, 14, 15])
         self.sim.set_friction(self.body_name, self.finger_indices[0], 1.0)
         self.sim.set_friction(self.body_name, self.finger_indices[1], 1.0)
         #self.sim.set_spinning_friction(self.body_name, self.finger_indices[0], spinning_friction=0.001)
@@ -55,11 +56,11 @@ class DoRISRobot(PyBulletRobot):
         arm_joint_angles = np.array(self.sim.inverse_kinematics(self.body_name, ee_link=self.ee_link, position=gripper_position, orientation=gripper_orientation))
         arm_joint_angles = arm_joint_angles[2:9]
         arm_joint_angles[0] = 0.0
-        #arm_joint_angles = arm_joint_angles[self.joint_indices][:-1]
+        #arm_joint_angles = arm_joint_angles[self.JOINT_INDICES][:-1]
         #arm_joint_angles[0] = np.clip(arm_joint_angles[0], 0.0, 0.8)
         #arm_joint_angles[0] = 0.5
-        finger1 = self.sim.get_joint_angle(self.body_name, self.joint_indices[-2])
-        finger2 = self.sim.get_joint_angle(self.body_name, self.joint_indices[-1])
+        finger1 = self.sim.get_joint_angle(self.body_name, self.JOINT_INDICES[-2])
+        finger2 = self.sim.get_joint_angle(self.body_name, self.JOINT_INDICES[-1])
         opening = (abs(finger1)+abs(finger2))
         opening += gripper_action
         gripper_joint_angles = [-opening/2, opening/2]
@@ -68,7 +69,7 @@ class DoRISRobot(PyBulletRobot):
         #self.control_joints(np.concatenate([arm_joint_angles, gripper_joint_angles]))
         self.control_joints(np.concatenate([arm_joint_angles, gripper_joint_angles]))
         #action *= 0.05
-        #current_angles = np.array([self.get_joint_angle(idx) for idx in self.joint_indices])
+        #current_angles = np.array([self.get_joint_angle(idx) for idx in self.JOINT_INDICES])
         #target_angles = current_angles + action
         #self.control_joints(target_angles=target_angles)
 
@@ -76,22 +77,22 @@ class DoRISRobot(PyBulletRobot):
         base_position = self.sim.get_base_position(self.body_name)
         gripper_position = self.get_ee_position()
         gripper_velocity = self.get_ee_velocity()
-        finger1 = self.sim.get_joint_angle(self.body_name, self.joint_indices[-2])
-        finger2 = self.sim.get_joint_angle(self.body_name, self.joint_indices[-1])
+        finger1 = self.sim.get_joint_angle(self.body_name, self.JOINT_INDICES[-2])
+        finger2 = self.sim.get_joint_angle(self.body_name, self.JOINT_INDICES[-1])
         opening = (abs(finger1)+abs(finger2))
         obs = np.concatenate((gripper_position, gripper_velocity, [opening,]))
-        #obs = np.array([self.get_joint_angle(idx) for idx in self.joint_indices])
+        #obs = np.array([self.get_joint_angle(idx) for idx in self.JOINT_INDICES])
         return obs.astype(np.float32)
 
     def reset(self):
         '''arm_joint_angles = np.array(self.sim.inverse_kinematics('doris', link=self.ee_link, position=[-0.2, 0.0, 0.2], orientation=self.lock_orientation))
-        arm_joint_angles = arm_joint_angles[self.joint_indices][:-2]
+        arm_joint_angles = arm_joint_angles[self.JOINT_INDICES][:-2]
         arm_joint_angles[0] = np.clip(arm_joint_angles[0], 0.0, 0.8)
         gripper_joint_angles = [0.6, 0.6]
         self.sim.set_joint_angles(np.concatenate([arm_joint_angles, gripper_joint_angles]))'''
-        joint_angles = [0.0,]*len(self.joint_indices)
+        joint_angles = [0.0,]*len(self.JOINT_INDICES)
         joint_angles[-2:-1] = [-0.05, -0.05]
-        self.sim.set_joint_angles(body=self.body_name, joints=self.joint_indices, angles=joint_angles)
+        self.sim.set_joint_angles(body=self.body_name, joints=self.JOINT_INDICES, angles=joint_angles)
         #return self.get_obs()
 
     def get_ee_position(self):
