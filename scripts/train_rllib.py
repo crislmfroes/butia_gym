@@ -73,8 +73,8 @@ class HerCallback(DefaultCallbacks):
 if __name__ == '__main__':
     wandb.login()
     config = sac.DEFAULT_CONFIG.copy()
-    config['num_gpus'] = 0
-    #config['num_workers'] = 4
+    config['num_gpus'] = 1
+    config['num_workers'] = 8
     #config['env_config']['render_mode'] = 'human'
     config['env_config']['render'] = True
     config['env_config']['HER_RANDOM'] = True
