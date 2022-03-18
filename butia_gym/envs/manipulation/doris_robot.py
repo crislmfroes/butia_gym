@@ -81,7 +81,7 @@ class DoRISRobot(PyBulletRobot):
         opening = (abs(finger1)+abs(finger2))
         obs = np.concatenate((gripper_position, gripper_velocity, [opening,]))
         #obs = np.array([self.get_joint_angle(idx) for idx in self.joint_indices])
-        return obs
+        return obs.astype(np.float32)
 
     def reset(self):
         '''arm_joint_angles = np.array(self.sim.inverse_kinematics('doris', link=self.ee_link, position=[-0.2, 0.0, 0.2], orientation=self.lock_orientation))
@@ -92,6 +92,7 @@ class DoRISRobot(PyBulletRobot):
         joint_angles = [0.0,]*len(self.joint_indices)
         joint_angles[-2:-1] = [-0.05, -0.05]
         self.set_joint_angles(joint_angles)
+        return self.get_obs()
 
     def get_ee_position(self):
         gripper_position = self.get_link_position(link=self.ee_link)
