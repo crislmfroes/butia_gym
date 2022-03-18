@@ -85,7 +85,7 @@ if __name__ == '__main__':
     config['env_config']['range_goal'] = 50
     config['callbacks'] = MultiCallbacks([
         HerCallback,
-        WandbLoggerCallback
+        WandbLoggerCallback('doris-manipulation', group='DRL'),
     ])
     trainer = sac.SACTrainer(config=config, env='DoRISPickAndPlace-v1')
     for i in range(10000):
