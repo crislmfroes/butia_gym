@@ -82,7 +82,7 @@ if __name__ == '__main__':
     config['num_workers'] = 1
     config['horizon'] = 50
     config['framework'] = 'torch'
-    #config['env_config']['render_mode'] = 'human'
+    config['disable_env_checking'] = True
     config['env_config']['render'] = False
     config['env_config']['HER_RANDOM'] = True
     config['env_config']['HER_OPT'] = True
