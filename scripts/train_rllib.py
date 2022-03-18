@@ -12,6 +12,7 @@ from ray import tune
 import copy
 import random
 import wandb
+import gym
 
 class HerCallback(DefaultCallbacks):
     def on_learn_on_batch(self, *, policy: Policy, train_batch: SampleBatch, result: dict, **kwargs) -> None:
@@ -74,6 +75,8 @@ class HerCallback(DefaultCallbacks):
 
 if __name__ == '__main__':
     wandb.login()
+    env_name = 'DoRISPickAndPlace-v1'
+    tune.register_env(env_name, lambda cfg: gym.make(env_name))
     config = sac.DEFAULT_CONFIG.copy()
     config['num_gpus'] = 1
     config['num_workers'] = 1
