@@ -1,6 +1,6 @@
 from gc import callbacks
 import torch
-import butia_gym
+import butia_gym.envs.manipulation
 from butia_gym.envs.manipulation.pick_and_place_env import DoRISPickAndPlaceEnv
 from butia_gym.envs.manipulation.pick_and_place_task import DoRISPickAndPlaceTask
 from ray.rllib.agents.callbacks import DefaultCallbacks, MultiCallbacks
