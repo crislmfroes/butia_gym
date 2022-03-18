@@ -95,5 +95,8 @@ if __name__ == '__main__':
         sac.SACTrainer,
         checkpoint_freq=1,
         config=config,
-        callbacks=callbacks
+        callbacks=callbacks,
+        stop={
+            "training_iteration": 1
+        },
     )
