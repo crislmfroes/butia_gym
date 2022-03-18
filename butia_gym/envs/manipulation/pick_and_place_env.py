@@ -22,5 +22,4 @@ class DoRISPickAndPlaceEnv(RobotTaskEnv):
     #    self.task.change_level(level)
 
     def reset(self, seed=None):
-        super().reset(seed)
-        return self._get_obs()
+        return super().reset(seed)
