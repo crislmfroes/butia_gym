@@ -76,7 +76,7 @@ class HerCallback(DefaultCallbacks):
 if __name__ == '__main__':
     wandb.login()
     env_name = 'DoRISPickAndPlace-v1'
-    tune.register_env(env_name, lambda cfg: gym.make(env_name))
+    #tune.register_env(env_name, lambda cfg: gym.make(env_name))
     config = sac.DEFAULT_CONFIG.copy()
     config['num_gpus'] = 1
     config['num_workers'] = 1
@@ -91,7 +91,7 @@ if __name__ == '__main__':
     config['callbacks'] = MultiCallbacks([
         HerCallback,
     ])
-    config['env'] = 'DoRISPickAndPlace-v1'
+    config['env'] = env_name
     callbacks = [WandbLoggerCallback('doris-manipulation', 'DRL')]
     tune.run(
         sac.SACTrainer,
