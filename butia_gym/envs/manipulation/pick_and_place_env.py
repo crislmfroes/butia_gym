@@ -10,12 +10,12 @@ class DoRISPickAndPlaceEnv(RobotTaskEnv):
         robot = DoRISRobot(sim)
         task = DoRISPickAndPlaceTask(sim, reward_type=reward_type, get_ee_position=robot.get_ee_position)
         super().__init__(robot, task)
-        self.observation_space['observation'].low = -50*np.ones(shape=self.observation_space['observation'].shape)
+        '''self.observation_space['observation'].low = -50*np.ones(shape=self.observation_space['observation'].shape)
         self.observation_space['observation'].high = 50*np.ones(shape=self.observation_space['observation'].shape)
         self.observation_space['desired_goal'].low = -50*np.ones(shape=self.observation_space['desired_goal'].shape)
         self.observation_space['desired_goal'].high = 50*np.ones(shape=self.observation_space['desired_goal'].shape)
         self.observation_space['achieved_goal'].low = -50*np.ones(shape=self.observation_space['achieved_goal'].shape)
-        self.observation_space['achieved_goal'].high = 50*np.ones(shape=self.observation_space['achieved_goal'].shape)
+        self.observation_space['achieved_goal'].high = 50*np.ones(shape=self.observation_space['achieved_goal'].shape)'''
     
     def change_level(self, level):
         self.task.change_level(level)
