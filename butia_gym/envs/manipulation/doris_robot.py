@@ -52,7 +52,7 @@ class DoRISRobot(PyBulletRobot):
         gripper_orientation = p.getQuaternionFromEuler((0.0, math.pi/2, 0.0))
         #gripper_orientation += ee_orientation_action
         #gripper_orientation = self.lock_gripper_orientation
-        arm_joint_angles = np.array(self.sim.inverse_kinematics(self.body_name, link=self.ee_link, position=gripper_position, orientation=gripper_orientation))
+        arm_joint_angles = np.array(self.sim.inverse_kinematics(self.body_name, ee_link=self.ee_link, position=gripper_position, orientation=gripper_orientation))
         arm_joint_angles = arm_joint_angles[2:9]
         arm_joint_angles[0] = 0.0
         #arm_joint_angles = arm_joint_angles[self.joint_indices][:-1]
