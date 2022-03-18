@@ -1,4 +1,4 @@
 ray[rllib]
 wandb
 panda_gym
-gym
+gym<=0.19
