@@ -80,6 +80,7 @@ if __name__ == '__main__':
     config = sac.DEFAULT_CONFIG.copy()
     config['num_gpus'] = 1
     config['num_workers'] = 1
+    config['horizon'] = 50
     config['framework'] = 'torch'
     config['validate_env'] = False
     #config['env_config']['render_mode'] = 'human'
