@@ -81,6 +81,7 @@ if __name__ == '__main__':
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
     config = sac.DEFAULT_CONFIG.copy()
     config['num_gpus'] = 1
+    config['num_cpus'] = 9
     config['num_workers'] = 8
     config['horizon'] = 50
     config['framework'] = 'torch'
