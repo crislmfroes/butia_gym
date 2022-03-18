@@ -2,7 +2,7 @@ import torch
 import butia_gym
 from butia_gym.envs.manipulation.pick_and_place_env import DoRISPickAndPlaceEnv
 from butia_gym.envs.manipulation.pick_and_place_task import DoRISPickAndPlaceTask
-from ray.rllib.agents.callbacks import DefaultCallbacks
+from ray.rllib.agents.callbacks import DefaultCallbacks, MultiCallbacks
 from ray.rllib.agents import sac
 from ray.rllib import *
 from ray.tune.integration.wandb import WandbLoggerCallback
@@ -83,10 +83,10 @@ if __name__ == '__main__':
     config['env_config']['HER_RAND_GOALS'] = 4
     config['env_config']['max_steps'] = 50
     config['env_config']['range_goal'] = 50
-    config['callbacks'] = [
-        HerCallback(),
-        WandbLoggerCallback('doris-manipulation', group='DRL'),
-    ]
+    config['callbacks'] = MultiCallbacks([
+        HerCallback,
+        WandbLoggerCallback
+    ])
     trainer = sac.SACTrainer(config=config, env='DoRISPickAndPlace-v1')
     for i in range(10000):
         print(trainer.train())
