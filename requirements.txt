@@ -1,4 +1,4 @@
-git+https://github.com/ray-project/ray.git
+ray[rllib]==1.10.0
 wandb
 pybullet
 git+https://github.com/qgallouedec/panda-gym.git
