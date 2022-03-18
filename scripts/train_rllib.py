@@ -13,6 +13,8 @@ import copy
 import random
 import wandb
 import gym
+from gym.spaces import Box, Dict
+import numpy as np
 
 class HerCallback(DefaultCallbacks):
     def on_learn_on_batch(self, *, policy: Policy, train_batch: SampleBatch, result: dict, **kwargs) -> None:
@@ -78,11 +80,16 @@ if __name__ == '__main__':
     env_name = 'butia_gym.envs.manipulation.pick_and_place_env.DoRISPickAndPlaceEnv'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
     config = sac.DEFAULT_CONFIG.copy()
-    config['num_gpus'] = 1
+    config['num_gpus'] = 0
     config['num_workers'] = 1
     config['horizon'] = 50
     config['framework'] = 'torch'
     #config['disable_env_checking'] = True
+    config['observation_space'] = Dict({
+        'observation': Box(-np.inf, np.inf, shape=(19,)),
+        'achieved_goal': Box(-np.inf, np.inf, shape=(3,)),
+        'desired_goal': Box(-np.inf, np.inf, shape=(3,)),
+    })
     config['env_config']['render'] = False
     config['env_config']['HER_RANDOM'] = True
     config['env_config']['HER_OPT'] = True
