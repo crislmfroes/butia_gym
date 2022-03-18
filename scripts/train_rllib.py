@@ -76,8 +76,7 @@ if __name__ == '__main__':
     wandb.login()
     config = sac.DEFAULT_CONFIG.copy()
     config['num_gpus'] = 1
-    config['num_cpus_per_worker'] = 2.0/9.0
-    config['num_workers'] = 8
+    config['num_workers'] = 1
     #config['env_config']['render_mode'] = 'human'
     config['env_config']['render'] = False
     config['env_config']['HER_RANDOM'] = True
