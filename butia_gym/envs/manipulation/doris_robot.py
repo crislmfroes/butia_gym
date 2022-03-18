@@ -21,16 +21,16 @@ class DoRISRobot(PyBulletRobot):
             file_name=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'assets', 'doris_description_viper_arm.urdf'),
             #file_name='./doris_description_nonexistent.urdf',
             base_position=np.array([-0.6, 0.0, -0.35]),
-            action_space=action_space,
-            #joint_indices=np.array([6, 7, 8, 9, 10, 11, 12, 14, 15]),
-            joint_indices=np.array([6, 7, 8, 9, 10, 11, 12, 17, 18]),
-            joint_forces=np.array([1000.0,]*9),
         )
+        self.action_space=action_space
+        #joint_indices=np.array([6, 7, 8, 9, 10, 11, 12, 14, 15])
+        self.joint_indices=np.array([6, 7, 8, 9, 10, 11, 12, 17, 18])
+        self.joint_forces=np.array([1000.0,]*9)
         self.finger_indices = np.array([17, 18])
-        self.sim.set_lateral_friction(self.body_name, self.finger_indices[0], lateral_friction=1.0)
-        self.sim.set_lateral_friction(self.body_name, self.finger_indices[1], lateral_friction=1.0)
-        self.sim.set_spinning_friction(self.body_name, self.finger_indices[0], spinning_friction=0.001)
-        self.sim.set_spinning_friction(self.body_name, self.finger_indices[1], spinning_friction=0.001)
+        self.sim.set_friction(self.body_name, self.finger_indices[0], 1.0)
+        self.sim.set_friction(self.body_name, self.finger_indices[1], 1.0)
+        #self.sim.set_spinning_friction(self.body_name, self.finger_indices[0], spinning_friction=0.001)
+        #self.sim.set_spinning_friction(self.body_name, self.finger_indices[1], spinning_friction=0.001)
         #self.observation_space = spaces.Box(-np.inf, np.inf, shape=(7,), dtype=np.float32)
         #print(p.getJointInfo(0, 13))
         #for i in range(20):
