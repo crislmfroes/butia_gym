@@ -11,7 +11,6 @@ class DoRISPickAndPlaceEnv(RobotTaskEnv):
         robot = DoRISRobot(sim)
         task = DoRISPickAndPlaceTask(sim, reward_type=reward_type, get_ee_position=robot.get_ee_position)
         super().__init__(robot, task)
-        time.sleep(1)
         '''self.observation_space['observation'].low = -50*np.ones(shape=self.observation_space['observation'].shape)
         self.observation_space['observation'].high = 50*np.ones(shape=self.observation_space['observation'].shape)
         self.observation_space['desired_goal'].low = -50*np.ones(shape=self.observation_space['desired_goal'].shape)
