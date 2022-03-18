@@ -13,12 +13,12 @@ class DoRISRobot(PyBulletRobot):
         action_dim = 4
         action_space = spaces.Box(-1.0, 1.0, shape=(action_dim,), dtype=np.float32)
         #self.lock_orientation = np.array([0, 1, 0, 0])
-        sim.physics_client.setAdditionalSearchPath(os.path.join(__path__, '..', 'assets'))
+        sim.physics_client.setAdditionalSearchPath(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'assets'))
         self.ee_link = 16
         super().__init__(
             sim,
             body_name="doris",
-            file_name=os.path.join(__path__, '..', 'assets', 'doris_description_viper_arm.urdf'),
+            file_name=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'assets', 'doris_description_viper_arm.urdf'),
             #file_name='./doris_description_nonexistent.urdf',
             base_position=np.array([-0.6, 0.0, -0.35]),
             action_space=action_space,
