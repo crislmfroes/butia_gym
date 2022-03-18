@@ -84,9 +84,9 @@ if __name__ == '__main__':
     config['num_gpus'] = 1
     config['num_workers'] = 8
     config['horizon'] = 50
-    config['framework'] = 'torch'
+    #config['framework'] = 'torch'
     #config['disable_env_checking'] = True
-    config['env_config']['observation_space'] = Dict({
+    config['observation_space'] = Dict({
         'observation': Box(-np.inf, np.inf, shape=(19,)),
         'achieved_goal': Box(-np.inf, np.inf, shape=(3,)),
         'desired_goal': Box(-np.inf, np.inf, shape=(3,)),
