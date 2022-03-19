@@ -80,6 +80,8 @@ class DoRISGraspEnv(gym.Env):
         ee_position = np.array(self.robot.get_ee_position())
         finger0_touch_object = len(p.getContactPoints(self.sim._bodies_idx[self.robot.body_name], self.sim._bodies_idx['object'], self.robot.FINGERS_INDICES[0], physicsClientId=self.sim.physics_client._client)) > 0
         finger1_touch_object = len(p.getContactPoints(self.sim._bodies_idx[self.robot.body_name], self.sim._bodies_idx['object'], self.robot.FINGERS_INDICES[1], physicsClientId=self.sim.physics_client._client)) > 0
+        finger0_touch_table = len(p.getContactPoints(self.sim._bodies_idx[self.robot.body_name], self.sim._bodies_idx['table'], self.robot.FINGERS_INDICES[0], physicsClientId=self.sim.physics_client._client)) > 0
+        finger1_touch_table = len(p.getContactPoints(self.sim._bodies_idx[self.robot.body_name], self.sim._bodies_idx['table'], self.robot.FINGERS_INDICES[1], physicsClientId=self.sim.physics_client._client)) > 0
         '''reward = 0.0
         if np.linalg.norm(object_position - target_position) < self.distance_threshold:
             reward += 10.0
@@ -99,6 +101,7 @@ class DoRISGraspEnv(gym.Env):
         reward = 0
         reward = -np.linalg.norm(ee_position - object_position)
         reward += -10.0*np.linalg.norm(target_position - object_position)
+        reward += -1.0*(finger0_touch_table or finger1_touch_table)
         reward += 1.0*(finger0_touch_object and finger1_touch_object)
         '''if np.linalg.norm(object_position - target_position) < self.distance_threshold:
             reward += 10
