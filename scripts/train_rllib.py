@@ -40,23 +40,23 @@ class HerCallback(DefaultCallbacks):
             train_batch_her_opt = copy.deepcopy(train_batch)
             for i in range(len(train_batch_her_opt['obs'])):
                 #train_batch_her_opt['obs'][i][0] = scaling(train_batch_her_opt['obs'][i]['achieved_goal'])
-                train_batch_her_opt['obs'][i][DESIRED_GOAL_START:DESIRED_GOAL_END] = train_batch_her_opt['obs'][i][ACHIEVED_GOAL_START:ACHIEVED_GOAL_END]
+                train_batch_her_opt['obs'][i]['desired_goal'] = train_batch_her_opt['obs'][i]['achieved_goal']
                 #train_batch_her_opt['infos'][i]['diff_to_goal'] = 0.0
                 #train_batch_her_opt['new_obs'][i][0] = scaling(train_batch_her_opt['obs'][i]['achieved_goal'])
-                train_batch_her_opt['rewards'][i] = reward(train_batch_her_opt['obs'][i][ACHIEVED_GOAL_START:ACHIEVED_GOAL_END], train_batch_her_opt['obs'][i][DESIRED_GOAL_START:DESIRED_GOAL_END])
+                train_batch_her_opt['rewards'][i] = reward(train_batch_her_opt['obs'][i]['achieved_goal'], train_batch_her_opt['obs'][i]['desired_goal'])
 
         if HER_RANDOM:
             FIRST_RAND = True
             for rand in range(RAND_GOALS):
                 train_batch_her_rand = copy.deepcopy(train_batch)
                 GOAL_IDX = random.choice(range(len(train_batch_her_rand['obs'])))
-                RAND_GOAL = train_batch_her_rand['obs'][GOAL_IDX][ACHIEVED_GOAL_START:ACHIEVED_GOAL_END]
+                RAND_GOAL = train_batch_her_rand['obs'][GOAL_IDX]['achieved_goal']
                 for i in range(len(train_batch_her_rand)):
                     #train_batch_her_rand['obs'][i][0] = scaling(RAND_GOAL)
-                    train_batch_her_rand['obs'][i][DESIRED_GOAL_START:DESIRED_GOAL_END] = RAND_GOAL
+                    train_batch_her_rand['obs'][i]['desired_goal'] = RAND_GOAL
                     #train_batch_her_rand['obs'][i]['diff_to_goal'] = abs(RAND_GOAL-train_batch_her_rand['infos'][i]['achieved_goal'])
                     #train_batch_her_rand['new_obs'][i][0] = train_batch_her_rand['obs'][i][0]
-                    train_batch_her_rand['rewards'][i] = reward(RAND_GOAL, train_batch_her_rand['obs'][i][ACHIEVED_GOAL_START:ACHIEVED_GOAL_END])
+                    train_batch_her_rand['rewards'][i] = reward(RAND_GOAL, train_batch_her_rand['obs'][i]['achieved_goal'])
                 if FIRST_RAND:
                     train_batch_her_rand_comb = copy.deepcopy(train_batch_her_rand)
                     FIRST_RAND = False
