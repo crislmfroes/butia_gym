@@ -73,7 +73,7 @@ class HerCallback(DefaultCallbacks):
 
 if __name__ == '__main__':
     wandb.login()
-    ray.init(num_cpus=9, num_gpus=1)
+    ray.init(num_cpus=9, num_gpus=9)
     env_name = 'butia_gym.envs.manipulation.pick_and_place_env.DoRISPickAndPlaceEnv'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
     config = sac.DEFAULT_CONFIG.copy()
@@ -81,7 +81,7 @@ if __name__ == '__main__':
     config['num_gpus'] = 1
     config['num_workers'] = 8
     config['horizon'] = 50
-    config['num_gpus_per_worker'] = 0.05
+    config['num_gpus_per_worker'] = 1
     #config['disable_env_checking'] = True
     #config['evaluation_config']['env_config']['render'] = True
     config['env_config']['render'] = False
