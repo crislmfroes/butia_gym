@@ -28,10 +28,10 @@ class DoRISRobot(PyBulletRobot):
         )
         self.action_space=action_space
         #JOINT_INDICES=np.array([6, 7, 8, 9, 10, 11, 12, 14, 15])
-        self.sim.set_friction(self.body_name, self.finger_indices[0], 1.0)
-        self.sim.set_friction(self.body_name, self.finger_indices[1], 1.0)
-        #self.sim.set_spinning_friction(self.body_name, self.finger_indices[0], spinning_friction=0.001)
-        #self.sim.set_spinning_friction(self.body_name, self.finger_indices[1], spinning_friction=0.001)
+        self.sim.set_friction(self.body_name, self.FINGERS_INDICES[0], 1.0)
+        self.sim.set_friction(self.body_name, self.FINGERS_INDICES[1], 1.0)
+        #self.sim.set_spinning_friction(self.body_name, self.FINGERS_INDICES[0], spinning_friction=0.001)
+        #self.sim.set_spinning_friction(self.body_name, self.FINGERS_INDICES[1], spinning_friction=0.001)
         #self.observation_space = spaces.Box(-np.inf, np.inf, shape=(7,), dtype=np.float32)
         #print(p.getJointInfo(0, 13))
         #for i in range(20):
