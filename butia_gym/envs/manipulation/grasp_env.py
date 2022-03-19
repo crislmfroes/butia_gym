@@ -124,6 +124,7 @@ class DoRISGraspEnv(gym.Env):
             position=np.array([0.0, 0.0, self.object_size/2 + 0.1]),
             rgba_color=np.array([0.1, 0.9, 0.1, 0.3]),
         )
+        self.sim.set_friction('object', 0, 1.0)
 
     def is_success(self):
         object_position = np.array(self.sim.get_base_position('object'))
