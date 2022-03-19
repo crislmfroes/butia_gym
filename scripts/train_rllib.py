@@ -28,10 +28,6 @@ class HerCallback(DefaultCallbacks):
         RAND_GOALS = policy.config['env_config']['HER_RAND_GOALS']
         print(f'Start length: {len(train_batch)}')
 
-        def scaling(input):
-            ''' Scaling function, because I scale the observation for better stability. This could also be imported from the environment'''
-            return float(input)
-
         def reward(goal, hit):
             return DoRISPickAndPlaceTask.reward_function(hit, goal, 0.05)
 
