@@ -87,6 +87,7 @@ if __name__ == '__main__':
     config['horizon'] = 50
     #config['framework'] = 'torch'
     #config['disable_env_checking'] = True
+    #config['evaluation_config']['env_config']['render'] = True
     config['env_config']['render'] = False
     config['env_config']['HER_RANDOM'] = True
     config['env_config']['HER_OPT'] = True
@@ -94,9 +95,9 @@ if __name__ == '__main__':
     config['env_config']['HER_RAND_GOALS'] = 4
     config['env_config']['max_steps'] = 50
     config['env_config']['range_goal'] = 50
-    #config['callbacks'] = MultiCallbacks([
-    #    HerCallback,
-    #])
+    config['callbacks'] = MultiCallbacks([
+        HerCallback,
+    ])
     config['env'] = env_name
     callbacks = [WandbLoggerCallback('doris-manipulation', 'DRL')]
     tune.run(
@@ -107,4 +108,5 @@ if __name__ == '__main__':
         stop={
             "training_iteration": 1000000
         },
+        resume='AUTO',
     )
