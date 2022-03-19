@@ -26,7 +26,8 @@ class DoRISRobot(PyBulletRobot):
             #file_name='./doris_description_nonexistent.urdf',
             base_position=np.array([-0.6, 0.0, -0.35]),
         )
-        self.action_space=action_space
+        self.action_space = action_space
+        self.observation_space = spaces.Box(-10.0, 10.0, shape=(7,))
         #JOINT_INDICES=np.array([6, 7, 8, 9, 10, 11, 12, 14, 15])
         self.sim.set_friction(self.body_name, self.FINGERS_INDICES[0], 1.0)
         self.sim.set_friction(self.body_name, self.FINGERS_INDICES[1], 1.0)
