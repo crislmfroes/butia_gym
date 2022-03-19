@@ -10,7 +10,7 @@ class DoRISRobot(PyBulletRobot):
     """DoRIS robot"""
 
     JOINT_INDICES = np.array([6, 7, 8, 9, 10, 11, 12, 17, 18])
-    JOINT_FORCES = np.array([1000.0,]*9)
+    JOINT_FORCES = np.array([100.0,]*9)
     FINGERS_INDICES = np.array([17, 18])
 
     def __init__(self, sim):
