@@ -23,4 +23,4 @@ class DoRISPickAndPlaceEnv(RobotTaskEnv):
         if self.observation_space is not None:
             for k in obs.keys():
                 obs[k] = np.clip(obs[k], self.observation_space[k].low, self.observation_space[k].high)
-        return obs
+        return np.concatenate([v for k, v in obs.items()])
