@@ -11,7 +11,7 @@ import pybullet as p
 import math
 
 class DoRISGraspEnv(gym.Env):
-    def __init__(self, render: bool = False, reward_type: str = "sparse"):
+    def __init__(self, render: bool = False, reward_type: str = "sparse", **kwargs):
         super().__init__()
         self.sim = PyBullet(render=render)
         self.robot = DoRISRobot(self.sim)
