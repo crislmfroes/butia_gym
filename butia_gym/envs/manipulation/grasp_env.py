@@ -57,6 +57,7 @@ class DoRISGraspEnv(gym.Env):
         return obs
 
     def get_obs(self):
+        robot_obs = self.robot.get_obs()
         object_position = np.array(self.sim.get_base_position("object"))
         object_rotation = np.array(self.sim.get_base_rotation("object"))
         object_velocity = np.array(self.sim.get_base_velocity("object"))
@@ -67,6 +68,7 @@ class DoRISGraspEnv(gym.Env):
                 object_rotation,
                 object_velocity,
                 object_angular_velocity,
+                robot_obs,
             ]
         )
         observation = np.clip(observation, -10.0, 10.0)
