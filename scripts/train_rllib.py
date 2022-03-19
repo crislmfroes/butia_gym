@@ -81,7 +81,7 @@ if __name__ == '__main__':
     config['num_gpus'] = 1
     config['num_workers'] = 8
     config['horizon'] = 50
-    #config['framework'] = 'torch'
+    config['framework'] = 'torch'
     #config['disable_env_checking'] = True
     #config['evaluation_config']['env_config']['render'] = True
     config['env_config']['render'] = False
