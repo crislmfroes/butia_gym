@@ -20,6 +20,7 @@ class DoRISPickAndPlaceEnv(RobotTaskEnv):
     
     def _get_obs(self):
         obs = super()._get_obs()
+        print(obs, self.observation_space)
         for k in obs.keys():
             obs[k] = np.clip(obs[k], self.observation_space[k].low, self.observation_space[k].high)
         return obs
