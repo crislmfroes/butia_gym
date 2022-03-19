@@ -73,13 +73,13 @@ class HerCallback(DefaultCallbacks):
 
 if __name__ == '__main__':
     wandb.login()
-    ray.init(num_cpus=9, num_gpus=1)
+    #ray.init(num_cpus=8, num_gpus=1)
     env_name = 'butia_gym.envs.manipulation.grasp_env.DoRISGraspEnv'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
     config = sac.DEFAULT_CONFIG.copy()
     config['framework'] = 'torch'
-    config['num_gpus'] = 0
-    config['num_workers'] = 8
+    config['num_gpus'] = 1
+    config['num_workers'] = 1
     config['horizon'] = 50
     #config['disable_env_checking'] = True
     #config['evaluation_config']['env_config']['render'] = True
