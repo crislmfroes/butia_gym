@@ -74,7 +74,7 @@ class HerCallback(DefaultCallbacks):
 if __name__ == '__main__':
     wandb.login()
     ray.init(num_cpus=9, num_gpus=1)
-    env_name = 'butia_gym.envs.manipulation.pick_and_place_env.DoRISPickAndPlaceEnv'
+    env_name = 'butia_gym.envs.manipulation.grasp_env.DoRISGraspEnv'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
     config = sac.DEFAULT_CONFIG.copy()
     config['framework'] = 'torch'
@@ -83,16 +83,16 @@ if __name__ == '__main__':
     config['horizon'] = 50
     #config['disable_env_checking'] = True
     #config['evaluation_config']['env_config']['render'] = True
-    config['env_config']['render'] = False
+    config['env_config']['render'] = True
     config['env_config']['HER_RANDOM'] = True
     config['env_config']['HER_OPT'] = True
     config['env_config']['clip_obs'] = True
     config['env_config']['HER_RAND_GOALS'] = 4
     config['env_config']['max_steps'] = 50
     config['env_config']['range_goal'] = 50
-    config['callbacks'] = MultiCallbacks([
-        HerCallback,
-    ])
+    #config['callbacks'] = MultiCallbacks([
+    #    HerCallback,
+    #])
     config['env'] = env_name
     callbacks = [WandbLoggerCallback('doris-manipulation', 'DRL')]
     tune.run(
