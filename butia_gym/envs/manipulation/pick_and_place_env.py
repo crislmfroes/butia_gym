@@ -4,13 +4,19 @@ from panda_gym.pybullet import PyBullet
 from butia_gym.envs.manipulation.doris_robot import DoRISRobot
 import numpy as np
 import time
+from gym import spaces
 
 class DoRISPickAndPlaceEnv(RobotTaskEnv):
     def __init__(self, render: bool = False, reward_type: str = "sparse", **kwargs):
         self.sim = PyBullet(render=render)
         self.robot = DoRISRobot(self.sim)
         self.task = DoRISPickAndPlaceTask(self.sim, reward_type=reward_type, get_ee_position=self.robot.get_ee_position)
-        RobotTaskEnv.__init__(self)
+        self.seed()  # required for init for can be changer later
+        obs = self.reset()
+        observation_shape = obs.shape
+        self.observation_space = spaces.Box(low=-10.0, high=10.0, shape=observation_shape)
+        self.action_space = self.robot.action_space
+        self.compute_reward = self.task.compute_reward
         '''self.observation_space['observation'].low = -50*np.ones(shape=self.observation_space['observation'].shape)
         self.observation_space['observation'].high = 50*np.ones(shape=self.observation_space['observation'].shape)
         self.observation_space['desired_goal'].low = -50*np.ones(shape=self.observation_space['desired_goal'].shape)
