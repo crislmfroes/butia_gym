@@ -16,7 +16,7 @@ class DoRISGraspEnv(gym.Env):
         self.sim = PyBullet(render=render)
         self.robot = DoRISRobot(self.sim)
         self.action_space = self.robot.action_space
-        self.observation_space = Box(low=-10.0, high=10.0, shape=(self.robot.observation_space.shape[0]+12,))
+        self.observation_space = Box(low=-10.0, high=10.0, shape=(self.robot.observation_space.shape[0]+15,))
         self.object_range_xy = 0.3
         self.object_size = 0.05
         self.distance_threshold = 0.05
