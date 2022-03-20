@@ -19,6 +19,6 @@ if __name__ == '__main__':
         obs = env.reset()
         done = False
         while not done:
-            action = agent.predict(obs)[0]
+            action = agent.predict(obs, deterministic=True)[0]
             obs, reward, done, info = env.step(action)
             env.render('human')

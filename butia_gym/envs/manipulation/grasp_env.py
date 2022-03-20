@@ -80,6 +80,8 @@ class DoRISGraspEnv(gym.Env):
         object_position = np.array(self.sim.get_base_position('object'))
         target_position = np.array(self.sim.get_base_position('target'))
         ee_position = np.array(self.robot.get_ee_position())
+        finger0_position = np.array(self.sim.get_link_position(self.robot.body_name, self.robot.FINGERS_INDICES[0]))
+        finger1_position = np.array(self.sim.get_link_position(self.robot.body_name, self.robot.FINGERS_INDICES[1]))
         finger0_touch_object = len(p.getContactPoints(self.sim._bodies_idx[self.robot.body_name], self.sim._bodies_idx['object'], self.robot.FINGERS_INDICES[0], physicsClientId=self.sim.physics_client._client)) > 0
         finger1_touch_object = len(p.getContactPoints(self.sim._bodies_idx[self.robot.body_name], self.sim._bodies_idx['object'], self.robot.FINGERS_INDICES[1], physicsClientId=self.sim.physics_client._client)) > 0
         finger0_touch_table = len(p.getContactPoints(self.sim._bodies_idx[self.robot.body_name], self.sim._bodies_idx['table'], self.robot.FINGERS_INDICES[0], physicsClientId=self.sim.physics_client._client)) > 0
@@ -100,16 +102,35 @@ class DoRISGraspEnv(gym.Env):
         elif self.previous_ee_position is not None and np.linalg.norm(object_position - ee_position) > np.linalg.norm(object_position - self.previous_ee_position):
             reward -= 0.5
         return reward'''
-        reward = 0
+        '''reward = 0
         reward = -np.linalg.norm(ee_position - object_position)
         reward += -10.0*np.linalg.norm(target_position - object_position)
         reward += -1.0*(finger0_touch_table or finger1_touch_table)
-        reward += 1.0*(finger0_touch_object and finger1_touch_object)
+        reward += 1.0*(finger0_touch_object and finger1_touch_object)'''
         '''if np.linalg.norm(object_position - target_position) < self.distance_threshold:
             reward += 10
         if finger0_touch_object and finger1_touch_object:
             reward += 1'''
-        return reward
+        rd = -np.linalg.norm(ee_position - object_position)
+        rg = 1 if finger0_touch_object or finger1_touch_object else 0
+        rl = -np.linalg.norm(object_position[2] - (self.object_size/2.0))
+        f0 = finger0_position - object_position
+        f1 = finger1_position - object_position
+        rf = -(np.dot(f0, f1)/(np.linalg.norm(f0)*np.linalg.norm(f1)))
+        e = self.distance_threshold
+        alpha = 1 if np.linalg.norm(target_position - object_position) < e else 0
+        rp = -np.linalg.norm(target_position - object_position) + alpha
+        if object_position[0] > 0.1 - (0.7/2.0) and object_position[0] < 0.1 + (0.7/2.0) and object_position[1] > -(0.7/2.0) and object_position[1] < (0.7/2.0):
+            ro = 0
+        else:
+            ro = -1
+        wd = 1
+        wg = 1
+        wl = 500
+        wf = 0.1
+        wp = 10
+        wo = 1
+        return wd*rd + wg*rg + wl*rl + wf*rf + wp*rp + wo*ro
 
     def create_scene(self):
         self.sim.create_plane(z_offset=-0.4)
