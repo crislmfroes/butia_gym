@@ -8,7 +8,7 @@ def ray_env_creator(env_name):
 
 gym.envs.register(
      id='DoRISPickAndPlace-v1',
-     entry_point='manipulation_drl.pick_and_place_env:DoRISPickAndPlaceEnv',
+     entry_point='butia_gym.envs.manipulation.pick_and_place_env:DoRISPickAndPlaceEnv',
      max_episode_steps=50,
 )
 

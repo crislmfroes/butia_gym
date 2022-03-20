@@ -1,4 +1,6 @@
 ray[rllib]<1.11.0
+stable_baselines3
+sb3_contrib
 wandb
 pybullet
 panda_gym==1.1.1

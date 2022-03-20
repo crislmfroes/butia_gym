@@ -64,7 +64,7 @@ class DoRISRobot(PyBulletRobot):
         finger2 = self.sim.get_joint_angle(self.body_name, self.JOINT_INDICES[-1])
         opening = (abs(finger1)+abs(finger2))
         opening += gripper_action
-        gripper_joint_angles = [-opening/2, opening/2]
+        gripper_joint_angles = [opening/2, -opening/2]
         #gripper_joint_angles = [opening + gripper_action, -(opening + gripper_action)]
         #gripper_joint_angles = np.clip(gripper_joint_angles, -0.08, 0.08)
         #self.control_joints(np.concatenate([arm_joint_angles, gripper_joint_angles]))

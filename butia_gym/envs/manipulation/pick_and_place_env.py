@@ -18,9 +18,9 @@ class DoRISPickAndPlaceEnv(RobotTaskEnv):
         self.observation_space['achieved_goal'].low = -50*np.ones(shape=self.observation_space['achieved_goal'].shape)
         self.observation_space['achieved_goal'].high = 50*np.ones(shape=self.observation_space['achieved_goal'].shape)'''
     
-    def _get_obs(self):
+    '''def _get_obs(self):
         obs = super()._get_obs()
         if self.observation_space is not None:
             for k in obs.keys():
                 obs[k] = np.clip(obs[k], self.observation_space[k].low, self.observation_space[k].high)
-        return obs
+        return obs'''
