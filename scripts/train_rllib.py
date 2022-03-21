@@ -73,7 +73,7 @@ class HerCallback(DefaultCallbacks):
 
 if __name__ == '__main__':
     wandb.login()
-    ray.init(num_cpus=8, num_gpus=1)
+    ray.init(num_cpus=9, num_gpus=1)
     #env_name = 'butia_gym.envs.manipulation.grasp_env.DoRISGraspEnv'
     env_name = 'pybullet_envs.bullet.KukaDiverseObjectEnv'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
