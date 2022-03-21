@@ -80,7 +80,7 @@ if __name__ == '__main__':
     config = sac.DEFAULT_CONFIG.copy()
     config['framework'] = 'torch'
     #config['num_gpus'] = 0
-    config['num_workers'] = 8
+    config['num_workers'] = 4
     config['horizon'] = 8
     #config['model']['dim'] = 48
     #config['disable_env_checking'] = True
