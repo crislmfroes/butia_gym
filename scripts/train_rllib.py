@@ -4,7 +4,7 @@ import torch
 #from butia_gym.envs.manipulation.pick_and_place_env import DoRISPickAndPlaceEnv
 #from butia_gym.envs.manipulation.pick_and_place_task import DoRISPickAndPlaceTask
 from ray.rllib.agents.callbacks import DefaultCallbacks, MultiCallbacks
-from ray.rllib.agents import sac, es
+from ray.rllib.agents import sac, es, dreamer
 from ray.rllib import *
 from ray.tune.integration.wandb import WandbLoggerCallback
 import ray
@@ -105,8 +105,9 @@ if __name__ == '__main__':
     config['env'] = env_name
     callbacks = [WandbLoggerCallback('kuka-manipulation', 'DRL')]
     tune.run(
-        sac.SACTrainer,
+        #sac.SACTrainer,
         #es.ESTrainer,
+        dreamer.DREAMERTrainer,
         checkpoint_freq=1,
         config=config,
         callbacks=callbacks,
