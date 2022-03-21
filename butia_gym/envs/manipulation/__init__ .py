@@ -14,7 +14,7 @@ gym.envs.register(
 
 gym.envs.register(
     id='DoRISDiverseObjectGrasping-v0',
-    entry_point='butia_gym.envs.manipulation.visual_grasping:DoRISDiverseObjectEnv',
+    entry_point='butia_gym.envs.manipulation.visual_grasp_env:DoRISDiverseObjectEnv',
     max_episode_steps=1000,
     reward_threshold=5.0,
 )
