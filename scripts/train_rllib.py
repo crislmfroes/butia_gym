@@ -78,7 +78,7 @@ if __name__ == '__main__':
     env_name = 'pybullet_envs.bullet.KukaDiverseObjectEnv'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
     config = sac.DEFAULT_CONFIG.copy()
-    config['framework'] = 'tf2'
+    config['framework'] = 'torch'
     config['num_gpus'] = 1
     #config['num_workers'] = 1
     #config['num_gpus_per_worker'] = 1
