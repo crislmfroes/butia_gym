@@ -85,7 +85,8 @@ if __name__ == '__main__':
     #config['disable_env_checking'] = True
     #config['evaluation_config']['env_config']['render'] = True
     #config['env_config']['reward_threshold'] = 5.0
-    config['env_config']['render'] = True
+    #config['env_config']['render'] = True
+    config['env_config']['renders'] = True
     #config['env_config']['HER_RANDOM'] = True
     #config['env_config']['HER_OPT'] = True
     #config['env_config']['clip_obs'] = True
