@@ -82,6 +82,7 @@ if __name__ == '__main__':
     config['num_gpus'] = 1
     config['num_workers'] = 1
     config['horizon'] = 1000
+    config['model']['dim'] = 48
     #config['disable_env_checking'] = True
     #config['evaluation_config']['env_config']['render'] = True
     #config['env_config']['reward_threshold'] = 5.0
