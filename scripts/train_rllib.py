@@ -4,7 +4,7 @@ import butia_gym.envs.manipulation
 from butia_gym.envs.manipulation.pick_and_place_env import DoRISPickAndPlaceEnv
 from butia_gym.envs.manipulation.pick_and_place_task import DoRISPickAndPlaceTask
 from ray.rllib.agents.callbacks import DefaultCallbacks, MultiCallbacks
-from ray.rllib.agents import sac
+from ray.rllib.agents import sac, es
 from ray.rllib import *
 from ray.tune.integration.wandb import WandbLoggerCallback
 import ray
@@ -79,8 +79,8 @@ if __name__ == '__main__':
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
     config = sac.DEFAULT_CONFIG.copy()
     config['framework'] = 'torch'
-    config['num_gpus'] = 0
-    config['num_workers'] = 1
+    #config['num_gpus'] = 0
+    #config['num_workers'] = 1
     config['horizon'] = 8
     #config['model']['dim'] = 48
     #config['disable_env_checking'] = True
@@ -102,7 +102,8 @@ if __name__ == '__main__':
     config['env'] = env_name
     callbacks = [WandbLoggerCallback('kuka-manipulation', 'DRL')]
     tune.run(
-        sac.SACTrainer,
+        #sac.SACTrainer,
+        es.ESTrainer,
         checkpoint_freq=1,
         config=config,
         callbacks=callbacks,
