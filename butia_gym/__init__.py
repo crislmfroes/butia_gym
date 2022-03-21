@@ -1,1 +1,1 @@
-from butia_gym.envs import *
+import butia_gym.envs

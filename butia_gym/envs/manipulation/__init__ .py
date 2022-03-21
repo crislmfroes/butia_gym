@@ -1,10 +1,10 @@
 import gym
-from ray.tune.registry import register_env
+#from ray.tune.registry import register_env
 
-def ray_env_creator(env_name):
+'''def ray_env_creator(env_name):
      def env_creator(env_config):
           return gym.make(env_name, *env_config)
-     return env_creator
+     return env_creator'''
 
 gym.envs.register(
      id='DoRISPickAndPlace-v1',
@@ -19,4 +19,4 @@ gym.envs.register(
     reward_threshold=5.0,
 )
 
-register_env('DoRISPickAndPlace-v1', ray_env_creator('DoRISPickAndPlace-v1'))
+#register_env('DoRISPickAndPlace-v1', ray_env_creator('DoRISPickAndPlace-v1'))
