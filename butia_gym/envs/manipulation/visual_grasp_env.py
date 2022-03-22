@@ -29,4 +29,4 @@ class DoRISDiverseObjectEnv(KukaDiverseObjectEnv):
                 break
         min_dist = np.min(distances)
         reward += -min_dist
-        return 
+        return reward
