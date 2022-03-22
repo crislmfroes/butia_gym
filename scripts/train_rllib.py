@@ -3,10 +3,10 @@ import torch
 #import butia_gym.envs.manipulation
 #from butia_gym.envs.manipulation.pick_and_place_env import DoRISPickAndPlaceEnv
 #from butia_gym.envs.manipulation.pick_and_place_task import DoRISPickAndPlaceTask
-#from ray.rllib.agents.callbacks import DefaultCallbacks#, MultiCallbacks
+from ray.rllib.agents.callbacks import DefaultCallbacks#, MultiCallbacks
 from ray.rllib.agents import sac, es, dreamer
 from ray.rllib import *
-from ray.tune.integration.wandb import WandbLoggerCallback
+#from ray.tune.integration.wandb import WandbLoggerCallback
 import ray
 from ray import tune
 import copy
