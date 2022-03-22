@@ -6,7 +6,7 @@ import torch
 from ray.rllib.agents.callbacks import DefaultCallbacks, RE3UpdateCallbacks#, MultiCallbacks
 from ray.rllib.agents import sac, es, dreamer, dqn, ddpg
 from ray.rllib import *
-#from ray.tune.integration.wandb import WandbLoggerCallback
+from ray.tune.integration.wandb import WandbLoggerCallback
 import ray
 from ray import tune
 import copy
