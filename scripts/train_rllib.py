@@ -4,7 +4,7 @@ import torch
 #from butia_gym.envs.manipulation.pick_and_place_env import DoRISPickAndPlaceEnv
 #from butia_gym.envs.manipulation.pick_and_place_task import DoRISPickAndPlaceTask
 from ray.rllib.agents.callbacks import DefaultCallbacks#, MultiCallbacks
-from ray.rllib.agents import sac, es, dreamer
+from ray.rllib.agents import sac, es, dreamer, dqn
 from ray.rllib import *
 #from ray.tune.integration.wandb import WandbLoggerCallback
 import ray
@@ -77,11 +77,11 @@ if __name__ == '__main__':
     #env_name = 'butia_gym.envs.manipulation.grasp_env.DoRISGraspEnv'
     env_name = 'butia_gym.envs.manipulation.visual_grasp_env.DoRISDiverseObjectEnv'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
-    config = dreamer.DEFAULT_CONFIG.copy()
+    config = dqn.DEFAULT_CONFIG.copy()
     config['framework'] = 'torch'
     config['num_gpus'] = 1.0
-    config['clip_actions'] = False
-    #config['num_workers'] = 1
+    #config['clip_actions'] = False
+    config['num_workers'] = 7
     #config['num_gpus_per_worker'] = 1.0/2.0
     #config['num_gpus'] = 1
     #config['num_gpus_per_worker'] = 1
@@ -96,7 +96,7 @@ if __name__ == '__main__':
     config['env_config']['renders'] = False
     config['env_config']['width'] = 42
     config['env_config']['height'] = 42
-    config['env_config']['frame_skip'] = 1
+    #config['env_config']['frame_skip'] = 1
     #config['env_config']['HER_RANDOM'] = True
     #config['env_config']['HER_OPT'] = True
     #config['env_config']['clip_obs'] = True
@@ -111,7 +111,8 @@ if __name__ == '__main__':
     tune.run(
         #sac.SACTrainer,
         #es.ESTrainer,
-        dreamer.DREAMERTrainer,
+        #dreamer.DREAMERTrainer,
+        dqn.ApexTrainer,
         checkpoint_freq=1,
         config=config,
         #callbacks=callbacks,
