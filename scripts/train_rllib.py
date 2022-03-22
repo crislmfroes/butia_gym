@@ -80,7 +80,7 @@ if __name__ == '__main__':
     config = dreamer.DEFAULT_CONFIG.copy()
     config['framework'] = 'torch'
     config['num_gpus'] = 1.0
-    config['num_workers'] = 1
+    #config['num_workers'] = 1
     #config['num_gpus_per_worker'] = 1.0/2.0
     #config['num_gpus'] = 1
     #config['num_gpus_per_worker'] = 1
