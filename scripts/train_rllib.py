@@ -80,8 +80,8 @@ if __name__ == '__main__':
     config = sac.DEFAULT_CONFIG.copy()
     #config['framework'] = 'torch'
     config['num_gpus'] = 1
-    config['callbacks'] = RE3UpdateCallbacks
-    config['exploration_config']['type'] = 'RE3'
+    #config['callbacks'] = RE3UpdateCallbacks
+    #config['exploration_config']['type'] = 'RE3'
     #config['clip_actions'] = False
     #config['num_workers'] = 7
     #config['num_gpus_per_worker'] = 1.0/8.0
