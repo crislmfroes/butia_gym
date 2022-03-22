@@ -106,9 +106,9 @@ if __name__ == '__main__':
     config['env'] = env_name
     callbacks = [WandbLoggerCallback('kuka-manipulation', 'DRL')]
     tune.run(
-        #sac.SACTrainer,
+        sac.SACTrainer,
         #es.ESTrainer,
-        dreamer.DREAMERTrainer,
+        #dreamer.DREAMERTrainer,
         checkpoint_freq=1,
         config=config,
         callbacks=callbacks,
