@@ -115,5 +115,5 @@ if __name__ == '__main__':
         stop={
             "training_iteration": 1000000
         },
-        resume='AUTO',
+        resume=True,
     )
