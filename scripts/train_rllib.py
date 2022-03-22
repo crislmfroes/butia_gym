@@ -96,6 +96,7 @@ if __name__ == '__main__':
     config['env_config']['renders'] = False
     config['env_config']['width'] = 42
     config['env_config']['height'] = 42
+    config['env_config'].pop('frame_skip')
     #config['env_config']['HER_RANDOM'] = True
     #config['env_config']['HER_OPT'] = True
     #config['env_config']['clip_obs'] = True
