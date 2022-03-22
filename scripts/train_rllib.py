@@ -111,7 +111,7 @@ if __name__ == '__main__':
         #dreamer.DREAMERTrainer,
         checkpoint_freq=1,
         config=config,
-        callbacks=callbacks,
+        #callbacks=callbacks,
         stop={
             "training_iteration": 1000000
         },
