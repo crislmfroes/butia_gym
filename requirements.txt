@@ -1,4 +1,5 @@
-ray[rllib]<1.11.0
+#ray[rllib]==1.0.0
+ray[rllib]
 stable_baselines3
 sb3_contrib
 wandb

@@ -3,7 +3,7 @@ import torch
 #import butia_gym.envs.manipulation
 #from butia_gym.envs.manipulation.pick_and_place_env import DoRISPickAndPlaceEnv
 #from butia_gym.envs.manipulation.pick_and_place_task import DoRISPickAndPlaceTask
-from ray.rllib.agents.callbacks import DefaultCallbacks#, MultiCallbacks
+from ray.rllib.agents.callbacks import DefaultCallbacks, RE3UpdateCallbacks#, MultiCallbacks
 from ray.rllib.agents import sac, es, dreamer, dqn, ddpg
 from ray.rllib import *
 #from ray.tune.integration.wandb import WandbLoggerCallback
@@ -77,12 +77,14 @@ if __name__ == '__main__':
     #env_name = 'butia_gym.envs.manipulation.grasp_env.DoRISGraspEnv'
     env_name = 'butia_gym.envs.manipulation.visual_grasp_env.DoRISDiverseObjectEnv'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
-    config = es.DEFAULT_CONFIG.copy()
-    config['framework'] = 'torch'
-    config['num_gpus'] = 1.0/8.0
+    config = sac.DEFAULT_CONFIG.copy()
+    #config['framework'] = 'torch'
+    config['num_gpus'] = 1
+    config['callbacks'] = RE3UpdateCallbacks
+    config['exploration_config']['type'] = 'RE3'
     #config['clip_actions'] = False
-    config['num_workers'] = 7
-    config['num_gpus_per_worker'] = 1.0/8.0
+    #config['num_workers'] = 7
+    #config['num_gpus_per_worker'] = 1.0/8.0
     #config['num_gpus'] = 1
     #config['num_gpus_per_worker'] = 1
     #config['num_gpus_per_worker'] = 1
@@ -107,15 +109,15 @@ if __name__ == '__main__':
     #    HerCallback,
     #])
     config['env'] = env_name
-    #callbacks = [WandbLoggerCallback('kuka-manipulation', 'DRL')]
+    callbacks = [WandbLoggerCallback('kuka-manipulation', 'DRL')]
     tune.run(
-        #sac.SACTrainer,
-        es.ESTrainer,
+        sac.SACTrainer,
+        #es.ESTrainer,
         #dreamer.DREAMERTrainer,
         #ddpg.ApexDDPGTrainer,
         checkpoint_freq=1,
         config=config,
-        #callbacks=callbacks,
+        callbacks=callbacks,
         stop={
             "training_iteration": 10000
         },
