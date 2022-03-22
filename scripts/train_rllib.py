@@ -4,7 +4,7 @@ import torch
 #from butia_gym.envs.manipulation.pick_and_place_env import DoRISPickAndPlaceEnv
 #from butia_gym.envs.manipulation.pick_and_place_task import DoRISPickAndPlaceTask
 from ray.rllib.agents.callbacks import DefaultCallbacks#, MultiCallbacks
-from ray.rllib.agents import sac, es, dreamer, dqn
+from ray.rllib.agents import sac, es, dreamer, dqn, ddpg
 from ray.rllib import *
 #from ray.tune.integration.wandb import WandbLoggerCallback
 import ray
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     #env_name = 'butia_gym.envs.manipulation.grasp_env.DoRISGraspEnv'
     env_name = 'butia_gym.envs.manipulation.visual_grasp_env.DoRISDiverseObjectEnv'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
-    config = dqn.DEFAULT_CONFIG.copy()
+    config = ddpg.DEFAULT_CONFIG.copy()
     config['framework'] = 'torch'
     config['num_gpus'] = 1.0
     #config['clip_actions'] = False
@@ -112,7 +112,7 @@ if __name__ == '__main__':
         #sac.SACTrainer,
         #es.ESTrainer,
         #dreamer.DREAMERTrainer,
-        dqn.ApexTrainer,
+        ddpg.ApexDDPGTrainer,
         checkpoint_freq=1,
         config=config,
         #callbacks=callbacks,
