@@ -110,7 +110,7 @@ if __name__ == '__main__':
     #env_name = 'butia_gym.envs.manipulation.grasp_env.DoRISGraspEnv'
     env_name = 'butia_gym.envs.manipulation.visual_grasp_env.DoRISDiverseObjectEnv'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
-    config = dqn.APEX_DEFAULT_CONFIG.copy()
+    config = dqn.DEFAULT_CONFIG.copy()
     config['framework'] = 'torch'
     config['num_gpus'] = 1
     config['num_workers'] = 3
@@ -147,7 +147,7 @@ if __name__ == '__main__':
     config['env'] = env_name
     callbacks = [WandbLoggerCallback('kuka-manipulation', 'DRL')]
     tune.run(
-        dqn.ApexTrainer,
+        dqn.DQNTrainer,
         #sac.SACTrainer,
         #es.ESTrainer,
         #dreamer.DREAMERTrainer,
