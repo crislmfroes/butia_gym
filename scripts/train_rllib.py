@@ -110,10 +110,10 @@ if __name__ == '__main__':
     #env_name = 'butia_gym.envs.manipulation.grasp_env.DoRISGraspEnv'
     env_name = 'butia_gym.envs.manipulation.visual_grasp_env.DoRISDiverseObjectEnv'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
-    config = dqn.DEFAULT_CONFIG.copy()
+    config = sac.DEFAULT_CONFIG.copy()
     config['framework'] = 'torch'
-    config['num_gpus'] = 1
-    config['num_workers'] = 0
+    #config['num_gpus'] = 1
+    config['num_workers'] = 7
     #config['clip_actions'] = False
     #config['num_workers'] = 7
     #config['num_gpus_per_worker'] = 0.5
@@ -127,8 +127,8 @@ if __name__ == '__main__':
     #config['evaluation_config']['env_config']['render'] = True
     #config['env_config']['reward_threshold'] = 5.0
     #config['env_config']['render'] = True
-    config['env_config']['renders'] = True
-    config['env_config']['isDiscrete'] = True
+    config['env_config']['renders'] = False
+    config['env_config']['isDiscrete'] = False
     config['env_config']['width'] = 42
     config['env_config']['height'] = 42
     #config['env_task_fn'] = curriculum_fn
@@ -169,7 +169,8 @@ if __name__ == '__main__':
     callbacks = [WandbLoggerCallback('kuka-manipulation', 'DRL')]
     tune.run(
         #ppo.PPOTrainer,
-        dqn.DQNTrainer,
+        #dqn.DQNTrainer,
+        sac.SACTrainer,
         #es.ESTrainer,
         #dreamer.DREAMERTrainer,
         #ddpg.ApexDDPGTrainer,
