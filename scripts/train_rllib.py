@@ -120,7 +120,7 @@ if __name__ == '__main__':
     #config['num_workers'] = 7
     #config['num_gpus_per_worker'] = 1.0/NUM_CPUS
     config['num_gpus_per_worker'] = 1
-    config['compress_observations'] = True
+    #config['compress_observations'] = True
     #config['num_envs_per_worker'] = int(96/NUM_CPUS)
     #config['training_intensity'] = 1
     #config['num_gpus'] = 1
@@ -135,14 +135,14 @@ if __name__ == '__main__':
     #config['env_config']['render'] = True
     config['env_config']['renders'] = False
     config['env_config']['isDiscrete'] = False
-    config['env_config']['width'] = 84
-    config['env_config']['height'] = 84
-    config['model']['dim'] = 84
-    config['model']['conv_filters'] = [
+    config['env_config']['width'] = 42
+    config['env_config']['height'] = 42
+    config['model']['dim'] = 42
+    '''config['model']['conv_filters'] = [
         [16,8,4],
         [32,4,2],
         [64,11,1]
-    ]
+    ]'''
     #config['env_task_fn'] = curriculum_fn
     #config['env_config']['start_level'] = 1
     #config['env_config']['frame_skip'] = 1
