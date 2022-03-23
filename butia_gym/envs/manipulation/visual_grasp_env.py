@@ -15,7 +15,7 @@ class DoRISDiverseObjectEnv(KukaDiverseObjectEnv):
         super().__init__(urdfRoot, actionRepeat, isEnableSelfCollision, renders, isDiscrete, maxSteps, dv, removeHeightHack, blockRandom, cameraRandom, width, height, numObjects, isTest)
         self.observation_space = spaces.Box(low=0, high=255, shape=self.observation_space.shape, dtype=np.uint8)
 
-    def _reward(self):
+    '''def _reward(self):
         """Calculates the reward for the episode.
         The reward is 1 if one of the objects is above height .2 at the end of the
         episode.
@@ -35,7 +35,7 @@ class DoRISDiverseObjectEnv(KukaDiverseObjectEnv):
         min_dist = np.min(distances)
         reward += -min_dist
         return reward
-
+'''
 class DoRISDiverseObjectEnvWithCurriculum(TaskSettableEnv):
 
     RANGE_LEVELS = [0.05, 0.1, 0.2, 0.3]
