@@ -107,7 +107,7 @@ if __name__ == '__main__':
     #config['callbacks'] = MultiCallbacks([
     #    HerCallback,
     #])
-    config['env'] = 
+    config['env'] = env_name
     #callbacks = [WandbLoggerCallback('kuka-manipulation', 'DRL')]
     tune.run(
         sac.SACTrainer,
