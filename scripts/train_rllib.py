@@ -96,7 +96,7 @@ if __name__ == '__main__':
     config['env_config']['renders'] = True
     config['env_config']['width'] = 42
     config['env_config']['height'] = 42
-    config['env_config']['start_level'] = 1
+    #config['env_config']['start_level'] = 1
     #config['env_config']['frame_skip'] = 1
     #config['env_config']['HER_RANDOM'] = True
     #config['env_config']['HER_OPT'] = True

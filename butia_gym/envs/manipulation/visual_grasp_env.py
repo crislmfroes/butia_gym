@@ -74,4 +74,4 @@ class DoRISDiverseObjectEnvWithCurriculum(TaskSettableEnv):
         self.switch_env = True
 
     def _make_grasp_env(self):
-        self.grasp_env = DoRISDiverseObjectEnv(blockRandom=self.RANGE_LEVELS[self.cur_level - 1])
+        self.grasp_env = DoRISDiverseObjectEnv(blockRandom=self.RANGE_LEVELS[self.cur_level - 1], width=42, height=42)
