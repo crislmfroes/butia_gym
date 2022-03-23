@@ -113,7 +113,7 @@ if __name__ == '__main__':
     config = dqn.APEX_DEFAULT_CONFIG.copy()
     config['framework'] = 'torch'
     config['num_gpus'] = 1
-    config['num_workers'] = 4
+    config['num_workers'] = 3
     #config['clip_actions'] = False
     #config['num_workers'] = 7
     #config['num_gpus_per_worker'] = 0.5
@@ -145,7 +145,7 @@ if __name__ == '__main__':
     #])
     config['exploration_config']['type'] = 'Curiosity'
     config['env'] = env_name
-    #callbacks = [WandbLoggerCallback('kuka-manipulation', 'DRL')]
+    callbacks = [WandbLoggerCallback('kuka-manipulation', 'DRL')]
     tune.run(
         dqn.ApexTrainer,
         #sac.SACTrainer,
@@ -154,7 +154,7 @@ if __name__ == '__main__':
         #ddpg.ApexDDPGTrainer,
         checkpoint_freq=1,
         config=config,
-        #callbacks=callbacks,
+        callbacks=callbacks,
         stop={
             "training_iteration": 10000
         },
