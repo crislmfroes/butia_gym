@@ -129,8 +129,14 @@ if __name__ == '__main__':
     #config['env_config']['render'] = True
     config['env_config']['renders'] = False
     config['env_config']['isDiscrete'] = False
-    config['env_config']['width'] = 42
-    config['env_config']['height'] = 42
+    config['env_config']['width'] = 84
+    config['env_config']['height'] = 84
+    config['model']['dim'] = 84
+    config['model']['conv_filters'] = [
+        [16,8,4],
+        [32,4,2],
+        [64,11,1]
+    ]
     #config['env_task_fn'] = curriculum_fn
     #config['env_config']['start_level'] = 1
     #config['env_config']['frame_skip'] = 1
