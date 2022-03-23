@@ -78,7 +78,7 @@ if __name__ == '__main__':
     env_name = 'butia_gym.envs.manipulation.visual_grasp_env.DoRISDiverseObjectEnvWithCurriculum'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
     config = sac.DEFAULT_CONFIG.copy()
-    config['framework'] = 'torch'
+    #config['framework'] = 'torch'
     config['num_gpus'] = 1
     #config['clip_actions'] = False
     #config['num_workers'] = 7
