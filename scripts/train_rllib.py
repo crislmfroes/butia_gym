@@ -120,7 +120,6 @@ if __name__ == '__main__':
     config['num_gpus_per_worker'] = 1.0/NUM_CPUS
     config['num_envs_per_worker'] = int(96/NUM_CPUS)
     #config['training_intensity'] = 1
-    config['reuse_actors'] = True
     #config['num_gpus'] = 1
     #config['num_gpus_per_worker'] = 1
     #config['num_gpus_per_worker'] = 1
@@ -190,5 +189,6 @@ if __name__ == '__main__':
         stop={
             "training_iteration": 10000
         },
+        reuse_actors=True,
         #resume=True,
     )
