@@ -57,7 +57,7 @@ class DoRISDiverseObjectEnvWithCurriculum(TaskSettableEnv):
 
     def step(self, action) -> Tuple[Any, float, bool, Dict[str, Any]]:
         obs, reward, done, info = self.grasp_env.step(action)
-        reward *= 4 ** (self.cur_level - 1)
+        reward *= 10 ** (self.cur_level - 1)
         return obs, reward, done, info
 
     @override(TaskSettableEnv)

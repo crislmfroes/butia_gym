@@ -1,5 +1,6 @@
 from gc import callbacks
 import torch
+from butia_gym.envs.manipulation.visual_grasp_env import DoRISDiverseObjectEnvWithCurriculum
 #import butia_gym.envs.manipulation
 #from butia_gym.envs.manipulation.pick_and_place_env import DoRISPickAndPlaceEnv
 #from butia_gym.envs.manipulation.pick_and_place_task import DoRISPickAndPlaceTask
@@ -71,6 +72,37 @@ class HerCallback(DefaultCallbacks):
         elif HER_OPTIMUM:
             train_batch = SampleBatch.concat_samples([train_batch, train_batch_her_opt])
 
+def curriculum_fn(
+    train_results, task_settable_env, env_ctx
+):
+    """Function returning a possibly new task to set `task_settable_env` to.
+    Args:
+        train_results (dict): The train results returned by Trainer.train().
+        task_settable_env (TaskSettableEnv): A single TaskSettableEnv object
+            used inside any worker and at any vector position. Use `env_ctx`
+            to get the worker_index, vector_index, and num_workers.
+        env_ctx (EnvContext): The env context object (i.e. env's config dict
+            plus properties worker_index, vector_index and num_workers) used
+            to setup the `task_settable_env`.
+    Returns:
+        TaskType: The task to set the env to. This may be the same as the
+            current one.
+    """
+    # Our env supports tasks 1 (default) to 5.
+    # With each task, rewards get scaled up by a factor of 10, such that:
+    # Level 1: Expect rewards between 0.0 and 1.0.
+    # Level 2: Expect rewards between 1.0 and 10.0, etc..
+    # We will thus raise the level/task each time we hit a new power of 10.0
+    new_task = int(np.log10(train_results["episode_reward_mean"]) + 2.1)
+    # Clamp between valid values, just in case:
+    new_task = max(min(new_task, 5), 1)
+    print(
+        f"Worker #{env_ctx.worker_index} vec-idx={env_ctx.vector_index}"
+        f"\nR={train_results['episode_reward_mean']}"
+        f"\nSetting env to task={new_task}"
+    )
+    return new_task
+
 if __name__ == '__main__':
     wandb.login()
     #ray.init(num_cpus=9, num_gpus=1)
@@ -96,6 +128,7 @@ if __name__ == '__main__':
     config['env_config']['renders'] = True
     config['env_config']['width'] = 42
     config['env_config']['height'] = 42
+    config['env_task_fn'] = curriculum_fn
     #config['env_config']['start_level'] = 1
     #config['env_config']['frame_skip'] = 1
     #config['env_config']['HER_RANDOM'] = True
@@ -107,7 +140,7 @@ if __name__ == '__main__':
     #config['callbacks'] = MultiCallbacks([
     #    HerCallback,
     #])
-    config['env'] = env_name
+    config['env'] = DoRISDiverseObjectEnvWithCurriculum
     #callbacks = [WandbLoggerCallback('kuka-manipulation', 'DRL')]
     tune.run(
         sac.SACTrainer,
