@@ -128,7 +128,7 @@ if __name__ == '__main__':
     #config['env_config']['reward_threshold'] = 5.0
     #config['env_config']['render'] = True
     config['env_config']['renders'] = True
-    config['env_config']['isDiscrete'] = False
+    config['env_config']['isDiscrete'] = True
     config['env_config']['width'] = 42
     config['env_config']['height'] = 42
     #config['env_task_fn'] = curriculum_fn
