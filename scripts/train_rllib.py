@@ -106,7 +106,7 @@ def curriculum_fn(
 
 if __name__ == '__main__':
     wandb.login()
-    NUM_CPUS=96
+    NUM_CPUS=8
     ray.init(num_cpus=NUM_CPUS, num_gpus=1)
     #env_name = 'butia_gym.envs.manipulation.grasp_env.DoRISGraspEnv'
     env_name = 'butia_gym.envs.manipulation.visual_grasp_env.DoRISDiverseObjectEnv'
@@ -118,6 +118,7 @@ if __name__ == '__main__':
     #config['clip_actions'] = False
     #config['num_workers'] = 7
     config['num_gpus_per_worker'] = 1.0/NUM_CPUS
+    config['num_envs_per_worker'] = 96/NUM_CPUS
     #config['num_gpus'] = 1
     #config['num_gpus_per_worker'] = 1
     #config['num_gpus_per_worker'] = 1
