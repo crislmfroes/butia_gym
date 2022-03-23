@@ -1,4 +1,5 @@
 from gc import callbacks
+from pyrsistent import dq
 import torch
 from butia_gym.envs.manipulation.visual_grasp_env import DoRISDiverseObjectEnvWithCurriculum
 #import butia_gym.envs.manipulation
@@ -112,7 +113,7 @@ if __name__ == '__main__':
     config = sac.DEFAULT_CONFIG.copy()
     config['framework'] = 'torch'
     config['num_gpus'] = 1
-    config['num_workers'] = 0
+    config['num_workers'] = 7
     #config['clip_actions'] = False
     #config['num_workers'] = 7
     #config['num_gpus_per_worker'] = 0.5
@@ -127,9 +128,10 @@ if __name__ == '__main__':
     #config['env_config']['reward_threshold'] = 5.0
     #config['env_config']['render'] = True
     config['env_config']['renders'] = True
+    config['env_config']['isDiscrete'] = True
     config['env_config']['width'] = 42
     config['env_config']['height'] = 42
-    config['env_task_fn'] = curriculum_fn
+    #config['env_task_fn'] = curriculum_fn
     #config['env_config']['start_level'] = 1
     #config['env_config']['frame_skip'] = 1
     #config['env_config']['HER_RANDOM'] = True
@@ -141,10 +143,12 @@ if __name__ == '__main__':
     #config['callbacks'] = MultiCallbacks([
     #    HerCallback,
     #])
-    config['env'] = DoRISDiverseObjectEnvWithCurriculum
+    config['exploration_config']['type'] = 'Curiosity'
+    config['env'] = env_name
     #callbacks = [WandbLoggerCallback('kuka-manipulation', 'DRL')]
     tune.run(
-        sac.SACTrainer,
+        dqn.ApexTrainer,
+        #sac.SACTrainer,
         #es.ESTrainer,
         #dreamer.DREAMERTrainer,
         #ddpg.ApexDDPGTrainer,
