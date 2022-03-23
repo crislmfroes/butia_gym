@@ -106,17 +106,18 @@ def curriculum_fn(
 
 if __name__ == '__main__':
     wandb.login()
-    #ray.init(num_cpus=9, num_gpus=1)
+    NUM_CPUS=96
+    ray.init(num_cpus=NUM_CPUS, num_gpus=1)
     #env_name = 'butia_gym.envs.manipulation.grasp_env.DoRISGraspEnv'
     env_name = 'butia_gym.envs.manipulation.visual_grasp_env.DoRISDiverseObjectEnv'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
     config = dqn.DEFAULT_CONFIG.copy()
     config['framework'] = 'torch'
-    config['num_gpus'] = 1/8.0
-    config['num_workers'] = 7
+    config['num_gpus'] = 1.0/NUM_CPUS
+    config['num_workers'] = NUM_CPUS-1
     #config['clip_actions'] = False
     #config['num_workers'] = 7
-    config['num_gpus_per_worker'] = 1/8.0
+    config['num_gpus_per_worker'] = 1.0/NUM_CPUS
     #config['num_gpus'] = 1
     #config['num_gpus_per_worker'] = 1
     #config['num_gpus_per_worker'] = 1
