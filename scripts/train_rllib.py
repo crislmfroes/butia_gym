@@ -114,10 +114,10 @@ if __name__ == '__main__':
     config = sac.DEFAULT_CONFIG.copy()
     config['framework'] = 'torch'
     #config['num_gpus'] = 1.0/NUM_CPUS
-    config['num_gpus'] = 1
+    #config['num_gpus'] = 1
     #config['num_workers'] = 0
     #config['clip_actions'] = False
-    config['num_workers'] = 0
+    #config['num_workers'] = 0
     #config['num_gpus_per_worker'] = 1.0/NUM_CPUS
     #config['num_gpus_per_worker'] = 1
     #config['compress_observations'] = True
@@ -137,7 +137,7 @@ if __name__ == '__main__':
     config['env_config']['isDiscrete'] = False
     config['env_config']['width'] = 42
     config['env_config']['height'] = 42
-    config['model']['dim'] = 42
+    #config['model']['dim'] = 42
     '''config['model']['conv_filters'] = [
         [16,8,4],
         [32,4,2],
