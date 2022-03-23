@@ -6,7 +6,7 @@ from butia_gym.envs.manipulation.visual_grasp_env import DoRISDiverseObjectEnvWi
 #from butia_gym.envs.manipulation.pick_and_place_env import DoRISPickAndPlaceEnv
 #from butia_gym.envs.manipulation.pick_and_place_task import DoRISPickAndPlaceTask
 from ray.rllib.agents.callbacks import DefaultCallbacks#, MultiCallbacks
-from ray.rllib.agents import sac, es, dreamer, dqn, ddpg
+from ray.rllib.agents import sac, es, dreamer, dqn, ddpg, ppo
 from ray.rllib import *
 from ray.tune.integration.wandb import WandbLoggerCallback
 import ray
@@ -110,7 +110,7 @@ if __name__ == '__main__':
     #env_name = 'butia_gym.envs.manipulation.grasp_env.DoRISGraspEnv'
     env_name = 'butia_gym.envs.manipulation.visual_grasp_env.DoRISDiverseObjectEnv'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
-    config = dqn.DEFAULT_CONFIG.copy()
+    config = ppo.DEFAULT_CONFIG.copy()
     config['framework'] = 'torch'
     config['num_gpus'] = 1
     config['num_workers'] = 0
@@ -167,7 +167,7 @@ if __name__ == '__main__':
     config['env'] = env_name
     callbacks = [WandbLoggerCallback('kuka-manipulation', 'DRL')]
     tune.run(
-        dqn.DQNTrainer,
+        ppo.PPOTrainer,
         #sac.SACTrainer,
         #es.ESTrainer,
         #dreamer.DREAMERTrainer,
