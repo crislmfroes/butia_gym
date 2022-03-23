@@ -114,7 +114,7 @@ if __name__ == '__main__':
     config = sac.DEFAULT_CONFIG.copy()
     config['framework'] = 'torch'
     #config['num_gpus'] = 1.0/NUM_CPUS
-    #config['num_gpus'] = 0.5
+    config['num_gpus'] = 1
     #config['num_workers'] = 0
     #config['clip_actions'] = False
     #config['num_workers'] = 7
