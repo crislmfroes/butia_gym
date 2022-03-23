@@ -7,7 +7,7 @@ from butia_gym.envs.manipulation.visual_grasp_env import DoRISDiverseObjectEnvWi
 from ray.rllib.agents.callbacks import DefaultCallbacks#, MultiCallbacks
 from ray.rllib.agents import sac, es, dreamer, dqn, ddpg
 from ray.rllib import *
-#from ray.tune.integration.wandb import WandbLoggerCallback
+from ray.tune.integration.wandb import WandbLoggerCallback
 import ray
 from ray import tune
 import copy
@@ -111,7 +111,8 @@ if __name__ == '__main__':
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
     config = sac.DEFAULT_CONFIG.copy()
     config['framework'] = 'torch'
-    #config['num_gpus'] = 0.5
+    config['num_gpus'] = 1
+    config['num_workers'] = 0
     #config['clip_actions'] = False
     #config['num_workers'] = 7
     #config['num_gpus_per_worker'] = 0.5
