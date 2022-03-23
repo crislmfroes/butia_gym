@@ -112,6 +112,7 @@ if __name__ == '__main__':
     env_name = 'butia_gym.envs.manipulation.visual_grasp_env.DoRISDiverseObjectEnv'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
     config = dqn.APEX_DEFAULT_CONFIG.copy()
+    config['num_workers'] = 3
     config['framework'] = 'torch'
     #config['num_gpus'] = 1.0/NUM_CPUS
     #config['num_gpus'] = 1
