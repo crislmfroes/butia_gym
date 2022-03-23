@@ -16,7 +16,7 @@ class DoRISDiverseObjectEnv(KukaDiverseObjectEnv):
         self.observation_space = spaces.Box(low=0, high=255, shape=self.observation_space.shape, dtype=np.uint8)
 
     def step(self, action):
-        print(action)
+        print(action, type(action))
         return super().step(action)
 
     '''def _reward(self):
