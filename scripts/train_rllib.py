@@ -117,9 +117,9 @@ if __name__ == '__main__':
     config['num_gpus'] = 1
     #config['num_workers'] = 0
     #config['clip_actions'] = False
-    #config['num_workers'] = 7
+    config['num_workers'] = 0
     #config['num_gpus_per_worker'] = 1.0/NUM_CPUS
-    config['num_gpus_per_worker'] = 1
+    #config['num_gpus_per_worker'] = 1
     #config['compress_observations'] = True
     #config['num_envs_per_worker'] = int(96/NUM_CPUS)
     #config['training_intensity'] = 1
