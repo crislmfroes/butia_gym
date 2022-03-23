@@ -16,8 +16,8 @@ class DoRISDiverseObjectEnv(KukaDiverseObjectEnv):
         self.observation_space = spaces.Box(low=0, high=255, shape=self.observation_space.shape, dtype=np.uint8)
         self._p.setPhysicsEngineParameter(enableFileCaching=False)
 
-    def step(self, action):
-        return super().step(int(action))
+    '''def step(self, action):
+        return super().step(int(action))'''
 
     '''def _reward(self):
         """Calculates the reward for the episode.
