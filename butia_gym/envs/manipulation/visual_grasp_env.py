@@ -42,9 +42,9 @@ class DoRISDiverseObjectEnvWithCurriculum(TaskSettableEnv):
 
     def __init__(self, config: EnvContext) -> None:
         self.config = config
+        self.cur_level = config.get('start_level', 1)
         self.grasp_env = None
         self._make_grasp_env()
-        self.cur_level = config.get('start_level', 1)
         self.observation_space = self.grasp_env.observation_space
         self.action_space = self.grasp_env.action_space
         self.switch_env = False
