@@ -128,7 +128,7 @@ if __name__ == '__main__':
     #config['env_config']['reward_threshold'] = 5.0
     #config['env_config']['render'] = True
     config['env_config']['renders'] = False
-    config['env_config']['isDiscrete'] = False
+    config['env_config']['isDiscrete'] = True
     config['env_config']['width'] = 84
     config['env_config']['height'] = 84
     config['model']['dim'] = 84
