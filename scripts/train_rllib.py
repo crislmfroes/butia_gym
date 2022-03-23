@@ -3,10 +3,10 @@ import torch
 #import butia_gym.envs.manipulation
 #from butia_gym.envs.manipulation.pick_and_place_env import DoRISPickAndPlaceEnv
 #from butia_gym.envs.manipulation.pick_and_place_task import DoRISPickAndPlaceTask
-from ray.rllib.agents.callbacks import DefaultCallbacks, RE3UpdateCallbacks#, MultiCallbacks
+from ray.rllib.agents.callbacks import DefaultCallbacks#, MultiCallbacks
 from ray.rllib.agents import sac, es, dreamer, dqn, ddpg
 from ray.rllib import *
-from ray.tune.integration.wandb import WandbLoggerCallback
+#from ray.tune.integration.wandb import WandbLoggerCallback
 import ray
 from ray import tune
 import copy
@@ -75,16 +75,14 @@ if __name__ == '__main__':
     wandb.login()
     #ray.init(num_cpus=9, num_gpus=1)
     #env_name = 'butia_gym.envs.manipulation.grasp_env.DoRISGraspEnv'
-    env_name = 'butia_gym.envs.manipulation.visual_grasp_env.DoRISDiverseObjectEnv'
+    env_name = 'butia_gym.envs.manipulation.visual_grasp_env.DoRISDiverseObjectEnvWithCurriculum'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
     config = sac.DEFAULT_CONFIG.copy()
-    #config['framework'] = 'torch'
-    config['num_gpus'] = 1
-    #config['callbacks'] = RE3UpdateCallbacks
-    #config['exploration_config']['type'] = 'RE3'
+    config['framework'] = 'torch'
+    config['num_gpus'] = 1.0/8.0
     #config['clip_actions'] = False
-    #config['num_workers'] = 7
-    #config['num_gpus_per_worker'] = 1.0/8.0
+    config['num_workers'] = 7
+    config['num_gpus_per_worker'] = 1.0/8.0
     #config['num_gpus'] = 1
     #config['num_gpus_per_worker'] = 1
     #config['num_gpus_per_worker'] = 1
@@ -98,6 +96,7 @@ if __name__ == '__main__':
     config['env_config']['renders'] = False
     config['env_config']['width'] = 42
     config['env_config']['height'] = 42
+    config['env_config']['start_level'] = 1
     #config['env_config']['frame_skip'] = 1
     #config['env_config']['HER_RANDOM'] = True
     #config['env_config']['HER_OPT'] = True
@@ -109,7 +108,7 @@ if __name__ == '__main__':
     #    HerCallback,
     #])
     config['env'] = env_name
-    callbacks = [WandbLoggerCallback('kuka-manipulation', 'DRL')]
+    #callbacks = [WandbLoggerCallback('kuka-manipulation', 'DRL')]
     tune.run(
         sac.SACTrainer,
         #es.ESTrainer,
@@ -117,7 +116,7 @@ if __name__ == '__main__':
         #ddpg.ApexDDPGTrainer,
         checkpoint_freq=1,
         config=config,
-        callbacks=callbacks,
+        #callbacks=callbacks,
         stop={
             "training_iteration": 10000
         },
