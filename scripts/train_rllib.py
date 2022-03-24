@@ -106,13 +106,13 @@ def curriculum_fn(
 
 if __name__ == '__main__':
     wandb.login()
-    NUM_CPUS=8
+    NUM_CPUS=76
     ray.init(num_cpus=NUM_CPUS, num_gpus=1)
     #env_name = 'butia_gym.envs.manipulation.grasp_env.DoRISGraspEnv'
     env_name = 'butia_gym.envs.manipulation.visual_grasp_env.DoRISDiverseObjectEnv'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
     config = dqn.APEX_DEFAULT_CONFIG.copy()
-    config['num_workers'] = 3
+    #config['num_workers'] = 3
     config['framework'] = 'torch'
     #config['num_gpus'] = 1.0/NUM_CPUS
     #config['num_gpus'] = 1
@@ -134,7 +134,7 @@ if __name__ == '__main__':
     #config['evaluation_config']['env_config']['render'] = True
     #config['env_config']['reward_threshold'] = 5.0
     #config['env_config']['render'] = True
-    config['env_config']['renders'] = True
+    config['env_config']['renders'] = False
     config['env_config']['isDiscrete'] = True
     config['env_config']['width'] = 84
     config['env_config']['height'] = 84
@@ -194,5 +194,5 @@ if __name__ == '__main__':
             "training_iteration": 10000
         },
         reuse_actors=True,
-        #resume=True,
+        resume='AUTO',
     )
