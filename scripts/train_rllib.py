@@ -106,16 +106,16 @@ def curriculum_fn(
 
 if __name__ == '__main__':
     wandb.login()
-    NUM_CPUS=76
+    NUM_CPUS=8
     ray.init(num_cpus=NUM_CPUS, num_gpus=1)
     #env_name = 'butia_gym.envs.manipulation.grasp_env.DoRISGraspEnv'
     env_name = 'butia_gym.envs.manipulation.visual_grasp_env.DoRISDiverseObjectEnv'
     #tune.register_env(env_name, lambda cfg: gym.make(env_name))
-    config = dqn.APEX_DEFAULT_CONFIG.copy()
+    config = dqn.DEFAULT_CONFIG.copy()
     #config['num_workers'] = 3
     config['framework'] = 'torch'
     #config['num_gpus'] = 1.0/NUM_CPUS
-    #config['num_gpus'] = 1
+    config['num_gpus'] = 1
     #config['num_workers'] = 0
     #config['clip_actions'] = False
     #config['num_workers'] = 0
@@ -183,7 +183,7 @@ if __name__ == '__main__':
     tune.run(
         #ppo.PPOTrainer,
         #dqn.DQNTrainer,
-        dqn.ApexTrainer,
+        dqn.DQNTrainer,
         #es.ESTrainer,
         #dreamer.DREAMERTrainer,
         #ddpg.ApexDDPGTrainer,
