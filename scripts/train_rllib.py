@@ -116,7 +116,7 @@ if __name__ == '__main__':
     config['framework'] = 'torch'
     #config['num_gpus'] = 1.0/NUM_CPUS
     config['num_gpus'] = 1
-    #config['num_workers'] = 0
+    config['num_workers'] = NUM_CPUS - 1
     #config['clip_actions'] = False
     #config['num_workers'] = 0
     #config['num_gpus_per_worker'] = 1.0/NUM_CPUS
